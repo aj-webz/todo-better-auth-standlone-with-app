@@ -40,8 +40,8 @@ export function CreateTodoSheet(): React.ReactElement {
   const form = useForm<CreateTodoFormInput>({
     resolver: zodResolver(CreateTodoFormSchema),
     defaultValues: {
-      title: "",
-      description: "",
+      title: "Add you task",
+      description: "Enter task description",
       dueDate: new Date(),
       dueTime: "00:00:00",
     },
@@ -86,21 +86,18 @@ export function CreateTodoSheet(): React.ReactElement {
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-1 flex-col gap-4 pt-4"
+          className="flex flex-1 flex-col gap-10 pt-4"
         >
-          {/* Title */}
-          <div className="space-y-2">
+                   <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input id="title" {...form.register("title")} />
           </div>
-
-          {/* Description */}
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea id="description" {...form.register("description")} />
           </div>
 
-          {/* Date */}
+         
           <Popover>
             <PopoverTrigger asChild>
               <Button
