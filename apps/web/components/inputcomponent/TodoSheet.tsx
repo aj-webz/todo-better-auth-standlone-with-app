@@ -51,9 +51,20 @@ export function CreateTodoSheet(): React.ReactElement {
 
   const onSubmit: SubmitHandler<CreateTodoFormInput> = (values) => {
     console.log("FORM VALUES (raw):", values);
-
-   
-    createTodo.mutate(values, {
+    const parts = values.dueTime.split(":");
+    const h = Number(parts[0]);
+    const m = Number(parts[1]);
+    const s = Number(parts[2]);
+    const combinedDate = new Date(values.dueDate);
+    combinedDate.setHours(h, m, s, 0);
+    const payLoad =
+    {
+      ...values,
+      dueDate: combinedDate.toISOString(),
+    } as unknown as CreateTodoFormInput
+    console.log("SENDING TO API (ISO):", payLoad.dueDate);
+    console.log()
+    createTodo.mutate(payLoad, {
       onSuccess: () => {
         form.reset({
           title: "",
@@ -90,7 +101,7 @@ export function CreateTodoSheet(): React.ReactElement {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-1 flex-col gap-10 pt-4"
         >
-                   <div className="space-y-2">
+          <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input id="title" {...form.register("title")} />
           </div>
@@ -99,7 +110,7 @@ export function CreateTodoSheet(): React.ReactElement {
             <Textarea id="description" {...form.register("description")} />
           </div>
 
-         
+
           <Popover>
             <PopoverTrigger asChild>
               <Button
