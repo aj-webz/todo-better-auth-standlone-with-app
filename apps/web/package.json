@@ -9,7 +9,8 @@
       "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "api:gen":"openapi-typescript ../../packages/server/openapi.json -o ./lib/api-schema.d.ts"
   },
   "dependencies": {
     "@workspace/ui": "workspace:*",

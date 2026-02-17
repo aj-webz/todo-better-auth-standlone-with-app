@@ -26,15 +26,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select"
+import { LoginSchema } from "@repo/shared"
 
 
-const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  role: z.enum(["user", "admin"]),
-})
 
-type LoginFormValues = z.infer<typeof loginSchema>
+
+type LoginFormValues = z.infer<typeof LoginSchema>
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -46,7 +43,7 @@ export default function LoginPage() {
     control,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(LoginSchema),
     defaultValues: { role: "user" },
   });
 

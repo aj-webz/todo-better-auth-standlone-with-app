@@ -7,25 +7,19 @@ import {
   type TodoStatusEnum,
 } from "@repo/shared";
 
-const baseUrl = "/api";
+const baseUrl = "/api/todos";
 
-/* ============================
-   Read Todos
-   ============================ */
+
 export async function readTodos(): Promise<Todo[]> {
   const res = await fetch(baseUrl);
 
   if (!res.ok) throw new Error("Failed to fetch");
 
   const json = await res.json();
-
-  // runtime validation at API boundary
   return json.map((t: unknown) => TodoSchema.parse(t));
 }
 
-/* ============================
-   Create Todo (FORM → API)
-   ============================ */
+
 export async function createTodo(
   input: CreateTodoFormInput
 ): Promise<Todo> {
@@ -42,9 +36,7 @@ export async function createTodo(
   return TodoSchema.parse(await res.json());
 }
 
-/* ============================
-   Update Status
-   ============================ */
+
 export async function updateTodoStatus(
   id: string,
   status: typeof TodoStatusEnum._type

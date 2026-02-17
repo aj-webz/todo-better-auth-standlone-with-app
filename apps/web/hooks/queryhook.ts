@@ -74,14 +74,14 @@ export function useUpdateTodoStatus() {
       return { previousTodos };
     },
 
-    // If the mutation fails, rollback
+    
     onError: (err, variables, context) => {
       if (context?.previousTodos) {
         queryClient.setQueryData(queryKey.all, context.previousTodos);
       }
     },
 
-    // Refetch after success to sync with server
+    
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: queryKey.all });
     },

@@ -69,7 +69,7 @@ export default function RegisterPage() {
       return data
     },
     onSuccess: () => {
-      toast.success("Account created successfully 🎉")
+      toast.success("Account created successfully")
       router.push("/login")
     },
     onError: (error: Error) => {

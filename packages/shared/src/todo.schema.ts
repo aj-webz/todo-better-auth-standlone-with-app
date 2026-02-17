@@ -49,11 +49,61 @@ const CreateTodoSchema = CreateTodoFormSchema.transform((data) => {
   };
 });
 
+// User schema:
+const RegisterSchema = z.object(
+  {
+    email: z.string().email(),
+    password: z.string().min(8),
+    role :z.enum(["user","admin"]),
+  }
+)
+
+const LoginSchema = RegisterSchema;
+
+const UserResponseSchema = z.object(
+  {
+    success:z.boolean(),
+    user: z.object({
+      id:z.string().uuid(),
+      email:z.string().email(),
+      password:z.string(),
+      role:z.enum(["user","admin"]),
+      createdAt:z.string().datetime(),
+    })
+  }
+)
+
+
+const ErrorSchema = z.object({
+  error: z.string(),
+});
+
+const MessageSchema = z.object({
+  message: z.string(),
+});
+
+
+
+const sessionResponseSchema = z.object({
+  authenticated: z.boolean(),
+  user: z.object({
+    sub: z.string(),
+    email: z.string(),
+    role: z.enum(["user", "admin"]),
+    exp: z.number(),
+  }),
+});
+
+
 export {
   TodoStatusEnum,
   TodoSchema,
   CreateTodoFormSchema,
   CreateTodoSchema,
+  RegisterSchema,
+  LoginSchema,
+  UserResponseSchema,
+  sessionResponseSchema,ErrorSchema,MessageSchema,
 };
 
 
