@@ -8,6 +8,7 @@ export default defineConfig({
   bundle: true,
   splitting: false,
   clean: true,
+  shims:true,
   noExternal: ["@repo/shared", "@repo/db", "@repo/auth"], 
    external: ["events", "fs", "path", "os", "crypto", "async_hooks"], 
   dts: false, 
