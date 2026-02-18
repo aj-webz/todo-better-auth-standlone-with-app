@@ -23,9 +23,8 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://todo-better-auth-standalone-server.vercel.app"
-
-  
+    "https://todo-better-auth-standalone-server.vercel.app",
+     "https://todo-better-auth-standalone-web.vercel.app",
   ],
 
   advanced: {

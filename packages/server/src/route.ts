@@ -43,7 +43,7 @@ const app = new Hono<{ Variables: Variables }>().basePath("/api")
 app.use(
 	"*", 
 	cors({
-		origin: "http://localhost:3000", 
+		origin: ["http://localhost:3000", "https://todo-better-auth-standalone-web.vercel.app"], 
 		allowHeaders: ["Content-Type","Authorization"],
 		allowMethods: ["POST", "GET", "OPTIONS","PATCH","DELETE"],
 		credentials: true,
