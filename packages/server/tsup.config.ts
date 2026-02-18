@@ -9,5 +9,7 @@ export default defineConfig({
   splitting: false,
   clean: true,
   noExternal: ["@repo/shared", "@repo/db", "@repo/auth"], 
+   external: ["events", "fs", "path", "os", "crypto", "async_hooks"], 
   dts: false, 
+  platform:'node'
 });
