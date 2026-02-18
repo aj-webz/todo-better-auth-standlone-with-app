@@ -4,7 +4,7 @@ export default defineConfig({
   entry: ["src/index.ts"],
   outDir: "api",
   format: ["esm"],
-  target: "node20", 
+  target: "es2024", 
   bundle: true,
   splitting: false,
   clean: true,
