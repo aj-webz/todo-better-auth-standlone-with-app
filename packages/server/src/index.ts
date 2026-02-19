@@ -53,6 +53,8 @@ app.use(
   }),
 );
 
+app.get("/health", (c) => c.json({ status: "ok" }))
+
 app.all("/auth/*",(c)=>
 {
   return auth.handler(c.req.raw);
