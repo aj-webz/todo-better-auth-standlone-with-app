@@ -5,9 +5,9 @@ export default defineConfig({
   outDir: "api",
   format: ["esm"],
   // target: "es2024", 
- // bundle: true,
-  //splitting: false,
-  //clean: true,
+   bundle: true,
+  splitting: false,
+  clean: true,
   //platform: "node",
   //minify: true,
   
