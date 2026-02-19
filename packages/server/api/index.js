@@ -43350,9 +43350,9 @@ var drizzleAdapter = (db2, config2) => {
 };
 
 // src/auth.ts
-import dotenv from "dotenv";
+//import dotenv from "dotenv";
 import { expo } from "@better-auth/expo";
-dotenv.config({ path: "../../.env" });
+//dotenv.config({ path: "../../.env" });
 if (!process.env.BETTER_AUTH_URL) {
   throw new Error("Not found Better auth");
 }
