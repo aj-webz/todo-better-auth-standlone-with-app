@@ -21,6 +21,9 @@ export function getDb() {
 
   pool = new Pool({
     connectionString: DATABASE_URL,
+    max: 2,
+    connectionTimeoutMillis: 5000,
+    idleTimeoutMillis: 10000,
     ssl: isLocal ? false : {
       rejectUnauthorized: false, 
     },
