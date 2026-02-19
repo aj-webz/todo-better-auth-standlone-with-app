@@ -4,8 +4,8 @@
   "outputDirectory": "api",
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/index.js"
+      "src": "/src/(.*)",
+      "dest": "/api/index.js"
     }
   ]
 }
