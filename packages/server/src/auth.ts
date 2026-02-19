@@ -1,7 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-//import dotenv from "dotenv";
-//dotenv.config({ path: "../../.env" });
+
 import { user, session, account, getDb } from "@repo/db";
 import { expo } from "@better-auth/expo"
 
