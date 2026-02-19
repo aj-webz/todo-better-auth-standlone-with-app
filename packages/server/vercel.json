@@ -1,15 +1,16 @@
 {
   "version": 2,
   "buildCommand": "pnpm build",
+  "outputDirectory": ".",
   "functions": {
-    "api/index.js": {
+    "dist/index.js": {
       "maxDuration": 30
     }
   },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/index.js"
+      "dest": "/dist/index.js"
     }
   ]
 }
