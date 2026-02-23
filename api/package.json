@@ -1,0 +1,16 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "echo \"No build needed\"",
+    "start": "node api/index.ts",
+    "dev": "node api/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.0.0",
+    "@repo/db": "workspace:*",
+    "@repo/shared": "workspace:*"
+  },
+  "packageManager": "pnpm@10.4.1"
+}
