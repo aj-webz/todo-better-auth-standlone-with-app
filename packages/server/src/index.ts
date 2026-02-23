@@ -57,19 +57,7 @@ app.use(
 );
 
 app.get("/health", (c) => c.json({ status: "ok" }))
-app.get("/db-test", async (c) => {
-  console.log("DB TEST START");
 
-  const db = getDb();
-
-  console.log("DB CONNECTED");
-
-  const result = await db.select().from(todos).limit(1);
-
-  console.log("QUERY DONE");
-
-  return c.json(result);
-});
 
 app.all("/auth/*",(c)=>
 {
