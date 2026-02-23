@@ -5,7 +5,7 @@ import { logger } from "hono/logger";
 import { nanoid } from "nanoid";
 //import bcrypt from "bcryptjs";
 import { getDb, todos } from "@repo/db"
-import {handle} from "hono/vercel"
+//import {handle} from "hono/vercel"
 import type { Context, Next } from "hono"
 import * as z from "zod";
 import {
@@ -558,5 +558,5 @@ app.get("/scalar-docs",Scalar((c)=>({
 })))
 
 
-export const config = {runtime:'nodejs'}
-export default handle(app) ;
+// export const config = {runtime:'nodejs'}
+export default app ;
