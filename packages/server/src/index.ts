@@ -58,10 +58,10 @@ app.use(
 
 app.get("/health", (c) => c.json({ status: "ok" }))
 
-// app.all("/auth/*",(c)=>
-// {
-//   return auth.handler(c.req.raw);
-// })
+app.all("/auth/*",(c)=>
+{
+  return auth.handler(c.req.raw);
+})
 
 
 
@@ -69,20 +69,20 @@ app.get("/health", (c) => c.json({ status: "ok" }))
 //const hour = 60 * 60;
 
 
-// app.use( async(c,next)=>
-// {
-//   const session = await auth.api.getSession({headers:c.req.raw.headers});
-//   console.log("Session:", JSON.stringify(session));
-//   if(!session)
-//   {
-//     c.set("user",null);
-//     c.set("session",null);
-//     await next();
-//     return;
-//   }
-//   c.set("user",session.user);
-//   await next();
-// });
+app.use( async(c,next)=>
+{
+  const session = await auth.api.getSession({headers:c.req.raw.headers});
+  console.log("Session:", JSON.stringify(session));
+  if(!session)
+  {
+    c.set("user",null);
+    c.set("session",null);
+    await next();
+    return;
+  }
+  c.set("user",session.user);
+  await next();
+});
 
 
 // function getJwtSecret() {
