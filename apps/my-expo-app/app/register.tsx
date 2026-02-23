@@ -65,7 +65,6 @@ export default function RegisterScreen() {
     Alert.alert("Success", "Account created successfully!", [
       {
         text: "OK",
-        onPress: () => router.replace("/login"),
       },
     ]);
   };
@@ -203,7 +202,7 @@ export default function RegisterScreen() {
             )}
           </View>
 
-          {/* Confirm Password */}
+        
           <View className="mb-6">
             <Text className="text-sm font-semibold text-gray-700 mb-1">
               Confirm Password

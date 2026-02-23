@@ -1,78 +1,75 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Button } from "@workspace/ui/components/button"
-import { Input } from "@workspace/ui/components/input"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@workspace/ui/components/button";
+import { Input } from "@workspace/ui/components/input";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@workspace/ui/components/card"
-import { Label } from "@workspace/ui/components/label"
-import Link from "next/link"
-import { useMutation } from "@tanstack/react-query"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
-import { Eye, EyeOff } from "lucide-react"
-import { authClient } from "@/lib/auth-client"
+} from "@workspace/ui/components/card";
+import { Label } from "@workspace/ui/components/label";
+import Link from "next/link";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { RegisterSchema } from "@repo/shared";
 
-const registerSchema = z.object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string().min(6, "Confirm your password"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  })
-
-type RegisterFormValues = z.infer<typeof registerSchema>
+type RegisterFormInput = z.infer<typeof RegisterSchema>;
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
-  })
+  } = useForm<RegisterFormInput>({ resolver: zodResolver(RegisterSchema) });
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const { mutate: registerUser } = useMutation({
-    mutationFn: async (values: RegisterFormValues) => {
-      const { error } = await  authClient.signUp.email({
-        name:values.name,
-        email:values.email,
-        password :values.password,
+  const { mutate: registerUser, isPending } = useMutation({
+    mutationFn: async (values: RegisterFormInput) => {
+      const { data, error } = await authClient.signUp.email({
+        name: values.name,
+        email: values.email,
+        password: values.password,
       });
+      if (error) {
+        switch (error.status) {
+          case 422:
+            throw new Error("User already exists with this email!");
+          case 400:
+            throw new Error("Invalid email or password format!");
+          case 500:
+            throw new Error("Server error! Please try again later.");
+          default:
+            throw new Error(error.message ?? "Sign up failed!");
+        }
+      }
+      return data;
     },
     onSuccess: () => {
-      toast.success("Account created successfully")
-      router.push("/login")
+      window.alert("Account created successfully! please login.");
     },
     onError: (error: Error) => {
-      toast.error(error.message)
+      window.alert(`Registration failed: ${error.message}`);
     },
-  })
+  });
 
-  const onSubmit = (data: RegisterFormValues) => {
-    registerUser(data)
+  function onSubmit(data: RegisterFormInput) {
+    registerUser(data);
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-muted/40 to-muted px-6">
       <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 backdrop-blur-xl shadow-2xl">
-        
         <CardHeader className="space-y-5 px-12 pt-14 pb-6 text-center">
           <CardTitle className="text-4xl font-extrabold tracking-tight">
             Create Account
@@ -84,8 +81,6 @@ export default function RegisterPage() {
 
         <CardContent className="px-12 pb-14">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-            {/* Name */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold">Name</Label>
               <Input
@@ -101,7 +96,6 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Email */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold">Email</Label>
               <Input
@@ -117,7 +111,6 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Password */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold">Password</Label>
               <div className="relative">
@@ -146,7 +139,6 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Confirm Password */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold">Confirm Password</Label>
               <div className="relative">
@@ -178,25 +170,26 @@ export default function RegisterPage() {
             <Button
               type="submit"
               className="h-12 w-full rounded-xl text-base font-semibold shadow-lg transition-all hover:scale-[1.02]"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPending}
             >
-              {isSubmitting ? "Creating account..." : "Create Account"}
+              {isPending ? "Creating account..." : "Create Account"}
             </Button>
           </form>
 
-          <div className="mt-10 text-center">
+          <div className="flex justify-between items-center mt-12 text-center">
             <p className="text-sm text-muted-foreground">
               Already have an account?{" "}
+            </p>
               <Link
                 href="/login"
                 className="font-semibold text-primary hover:underline"
               >
                 Login here
               </Link>
-            </p>
+          
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

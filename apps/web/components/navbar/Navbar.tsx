@@ -52,31 +52,22 @@ export default function Navbar() {
   const queryClient = useQueryClient();
 
  
-  const { data: session, isLoading } = useQuery({
-    queryKey: ["session"],
-    queryFn: async () => {
-      
-      const { data, error } = await authClient.getSession();
-      if (error) throw new Error(error.message);
-      return data; 
-    },
-  });
+const { data: session, isPending: isLoading } = authClient.useSession();
 
- 
-  const { mutate: logout, isPending: isLoggingOut } = useMutation({
-    mutationFn: async () => {
-      const { error } = await authClient.signOut();
-      if (error) throw new Error(error.message);
-    },
-    onSuccess: () => {
-      queryClient.clear();
-      toast.success("Logged out successfully");
-      router.push("/login");
-    },
-    onError: (error: any) => {
-      toast.error(error.message || "Failed to logout");
-    },
-  });
+const { mutate: logout, isPending: isLoggingOut } = useMutation({
+  mutationFn: async () => {
+    const { error } = await authClient.signOut();
+    if (error) throw new Error(error.message ?? "Sign out failed");
+  },
+  onSuccess: () => {
+    queryClient.clear();
+    toast.success("Logged out successfully");
+    router.push("/login");
+  },
+  onError: (error: Error) => {
+    toast.error(error.message ?? "Failed to logout");
+  },
+});
 
   return (
     <header className="h-16 w-full border-b bg-white px-9 flex items-center justify-between">

@@ -2,36 +2,61 @@ import { Stack } from "expo-router";
 import { View, ActivityIndicator } from "react-native";
 import "global.css";
 import { authClient } from "@/lib/authClient";
-import { Text } from "react-native"
+import { Text } from "react-native";
+import { Provider } from "@/lib/query-provider";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AvatarMenu from "@/components/AvatarMenu";
 
-export default function Layout()
-{
-  const { data:session , isPending } = authClient.useSession();
+function Layout() {
+  const { data: session, isPending } = authClient.useSession();
   const islogged = !!session;
-  console.log("logging in layout:",islogged);
 
-
-  if(isPending)
-  {
-    return( 
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  if (isPending) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" />
-    </View>
-    )
+      </View>
+    );
   }
 
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: islogged,
+        headerStyle: { backgroundColor: "#000000" },
+        headerShadowVisible: false,
+        headerTitle: "",
+        headerTintColor:"#CF9FFF",
+        headerRight: () => (
+          <View style={{ marginRight: 16 ,marginBottom:5}}>
+            <AvatarMenu />
+          </View>
+        ),
+      }}
+    >
+      <Stack.Protected guard={islogged}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="private" />
+      </Stack.Protected>
 
-return (
-  <Stack screenOptions={{ headerShown: false }}>
-    
+      <Stack.Protected guard={!islogged}>
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+      </Stack.Protected>
 
-    <Stack.Protected guard={islogged}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="private" />
-    </Stack.Protected>{/*fall back*/}
+      <Stack.Screen name="register" options={{ headerShown: false }} />
+    </Stack>
+  );
+}
 
-      <Stack.Screen name="login" />
-      <Stack.Screen name="register" />
-  </Stack>
-);
+export default function RootLayout() {
+  return (
+    <GestureHandlerRootView className="flex-1">
+      <SafeAreaProvider>
+        <Provider>
+          <Layout />
+        </Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
+  );
 }

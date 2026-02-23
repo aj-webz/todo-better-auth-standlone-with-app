@@ -40,10 +40,10 @@ export function CreateTodoSheet(): React.ReactElement {
   const form = useForm<CreateTodoFormInput>({
     resolver: zodResolver(CreateTodoFormSchema),
     defaultValues: {
-      title: "Add Task name",
-      description: "Enter task description",
-      dueDate: new Date(),
-      dueTime: "00:00:00",
+      title: "",
+      description: "Enter your description",
+      dueDate: new Date(),       
+      dueTime: "00:00:00",      
     },
   });
 
@@ -51,20 +51,42 @@ export function CreateTodoSheet(): React.ReactElement {
     console.log("FORM VALUES (raw):", values);
 
    
-    createTodo.mutate(values, {
-      onSuccess: () => {
-        form.reset({
-          title: "",
-          description: "",
-          dueDate: new Date(),
-          dueTime: "00:00:00",
-        });
-        setOpen(false);
+    const timeParts = values.dueTime.split(":").map(Number);
+    const h = timeParts[0] ?? 0;
+    const m = timeParts[1] ?? 0;
+    const s = timeParts[2] ?? 0;
+
+    const endAt = new Date(values.dueDate);
+    endAt.setHours(h, m, s, 0);
+
+    createTodo.mutate(
+      {
+        body: {
+          title: values.title,
+          description: values.description,
+          endAt:endAt.toISOString(),
+        },
       },
-      onError: (err) => {
-        console.error("CREATE TODO FAILED:", err);
-      },
-    });
+      {
+        onSuccess: () => {
+          console.log("Todo created!");
+          form.reset({
+            title: "",
+            description: "",
+            dueDate: new Date(),
+            dueTime: "00:00:00",
+          });
+          setOpen(false);
+        },
+        onError: (err) => {
+          const message =
+            typeof err === "object" && err !== null && "error" in err
+              ? (err as { error: string }).error
+              : "Failed to create todo";
+          window.alert(`${message}`);
+        },
+      }
+    );
   };
 
   const dueDate = form.watch("dueDate");
@@ -79,51 +101,75 @@ export function CreateTodoSheet(): React.ReactElement {
         </Button>
       </SheetTrigger>
 
-      <SheetContent className="flex w-full flex-col p-5 sm:max-w-md">
+      <SheetContent
+        aria-describedby={undefined}
+        className="flex w-full flex-col p-5 sm:max-w-md"
+      >
         <SheetHeader className="space-y-2 pb-3 border-b">
           <SheetTitle>Create Todo</SheetTitle>
         </SheetHeader>
 
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-1 flex-col gap-10 pt-4"
+          className="flex flex-1 flex-col gap-6 pt-4"
         >
-                   <div className="space-y-2">
+         
+          <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input id="title" {...form.register("title")} />
+            {form.formState.errors.title && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.title.message}
+              </p>
+            )}
           </div>
+
+    
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea id="description" {...form.register("description")} />
+            {form.formState.errors.description && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.description.message}
+              </p>
+            )}
           </div>
 
-         
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                type="button"
-                variant="outline"
-                className={cn("justify-start")}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {format(dueDate, "dd MMM yyyy")}
-              </Button>
-            </PopoverTrigger>
-
-            <PopoverContent>
-              <Calendar
-                mode="single"
-                selected={dueDate}
-                onSelect={(date) => {
-                  if (!date) return;
-                  form.setValue("dueDate", date, {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  });
-                }}
-              />
-            </PopoverContent>
-          </Popover>
+     
+          <div className="space-y-2">
+            <Label>Due Date</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full justify-start"
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+              
+                  {dueDate ? format(dueDate, "dd MMM yyyy") : "Pick a date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <Calendar
+                  mode="single"
+                  selected={dueDate}      
+                  onSelect={(date) => {
+                    if (!date) return;
+                    form.setValue("dueDate", date, {  
+                      shouldValidate: true,
+                      shouldDirty: true,
+                    });
+                  }}
+                />
+              </PopoverContent>
+            </Popover>
+            {form.formState.errors.dueDate && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.dueDate.message}
+              </p>
+            )}
+          </div>
 
           {/* Time */}
           <div className="space-y-2">
@@ -131,26 +177,30 @@ export function CreateTodoSheet(): React.ReactElement {
             <Input
               id="time"
               type="time"
-              step={1}
-              value={dueTime.slice(0, 5)}
+              step={1}                    
+              value={dueTime}
               onChange={(e) => {
                 const value = e.target.value;
+                // ✅ Normalize to HH:mm:ss
                 const normalized =
                   value.length === 5 ? `${value}:00` : value;
-
                 form.setValue("dueTime", normalized, {
                   shouldValidate: true,
                   shouldDirty: true,
                 });
               }}
             />
+            {form.formState.errors.dueTime && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.dueTime.message}
+              </p>
+            )}
           </div>
 
           <SheetFooter className="mt-auto flex gap-4">
             <Button type="submit" disabled={createTodo.isPending}>
               {createTodo.isPending ? "Creating…" : "Create Todo"}
             </Button>
-
             <SheetClose asChild>
               <Button type="button" variant="outline">
                 Cancel

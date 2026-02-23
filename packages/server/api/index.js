@@ -15,7 +15,7 @@ var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read fr
 var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 
-// ../../node_modules/.pnpm/quansync@0.2.11/node_modules/quansync/dist/index.mjs
+// ../../node_modules/quansync/dist/index.mjs
 function isThenable(value) {
   return value && typeof value === "object" && typeof value.then === "function";
 }
@@ -101,7 +101,7 @@ function quansync(input, options) {
 }
 var GET_IS_ASYNC, QuansyncError, DEFAULT_ON_YIELD, getIsAsync;
 var init_dist = __esm({
-  "../../node_modules/.pnpm/quansync@0.2.11/node_modules/quansync/dist/index.mjs"() {
+  "../../node_modules/quansync/dist/index.mjs"() {
     "use strict";
     GET_IS_ASYNC = /* @__PURE__ */ Symbol.for("quansync.getIsAsync");
     QuansyncError = class extends Error {
@@ -118,7 +118,7 @@ var init_dist = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/arktype-aI7TBD0R.js
+// ../../node_modules/@standard-community/standard-json/dist/arktype-aI7TBD0R.js
 var arktype_aI7TBD0R_exports = {};
 __export(arktype_aI7TBD0R_exports, {
   default: () => getToJsonSchemaFn
@@ -127,12 +127,12 @@ function getToJsonSchemaFn() {
   return (schema, options) => schema.toJsonSchema(options);
 }
 var init_arktype_aI7TBD0R = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/arktype-aI7TBD0R.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/arktype-aI7TBD0R.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/effect-QlVUlMFu.js
+// ../../node_modules/@standard-community/standard-json/dist/effect-QlVUlMFu.js
 var effect_QlVUlMFu_exports = {};
 __export(effect_QlVUlMFu_exports, {
   default: () => getToJsonSchemaFn2
@@ -146,13 +146,13 @@ async function getToJsonSchemaFn2() {
   }
 }
 var init_effect_QlVUlMFu = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/effect-QlVUlMFu.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/effect-QlVUlMFu.js"() {
     "use strict";
     init_index_CLddUTqr();
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/sury-CWZTCd75.js
+// ../../node_modules/@standard-community/standard-json/dist/sury-CWZTCd75.js
 var sury_CWZTCd75_exports = {};
 __export(sury_CWZTCd75_exports, {
   default: () => getToJsonSchemaFn3
@@ -166,13 +166,13 @@ async function getToJsonSchemaFn3() {
   }
 }
 var init_sury_CWZTCd75 = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/sury-CWZTCd75.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/sury-CWZTCd75.js"() {
     "use strict";
     init_index_CLddUTqr();
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/typebox-Dei93FPO.js
+// ../../node_modules/@standard-community/standard-json/dist/typebox-Dei93FPO.js
 var typebox_Dei93FPO_exports = {};
 __export(typebox_Dei93FPO_exports, {
   default: () => getToJsonSchemaFn4
@@ -181,12 +181,12 @@ function getToJsonSchemaFn4() {
   return (schema) => JSON.parse(JSON.stringify(schema.Type()));
 }
 var init_typebox_Dei93FPO = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/typebox-Dei93FPO.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/typebox-Dei93FPO.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/valibot--1zFm7rT.js
+// ../../node_modules/@standard-community/standard-json/dist/valibot--1zFm7rT.js
 var valibot_1zFm7rT_exports = {};
 __export(valibot_1zFm7rT_exports, {
   default: () => getToJsonSchemaFn5
@@ -200,16 +200,16 @@ async function getToJsonSchemaFn5() {
   }
 }
 var init_valibot_1zFm7rT = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/valibot--1zFm7rT.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/valibot--1zFm7rT.js"() {
     "use strict";
     init_index_CLddUTqr();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/Options.js
+// ../../node_modules/zod-to-json-schema/dist/esm/Options.js
 var ignoreOverride, jsonDescription, defaultOptions, getDefaultOptions;
 var init_Options = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/Options.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/Options.js"() {
     "use strict";
     ignoreOverride = /* @__PURE__ */ Symbol("Let zodToJsonSchema decide on which parser to use");
     jsonDescription = (jsonSchema, def) => {
@@ -258,10 +258,10 @@ var init_Options = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/Refs.js
+// ../../node_modules/zod-to-json-schema/dist/esm/Refs.js
 var getRefs;
 var init_Refs = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/Refs.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/Refs.js"() {
     "use strict";
     init_Options();
     getRefs = (options) => {
@@ -286,7 +286,7 @@ var init_Refs = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/errorMessages.js
+// ../../node_modules/zod-to-json-schema/dist/esm/errorMessages.js
 function addErrorMessage(res, key, errorMessage, refs) {
   if (!refs?.errorMessages)
     return;
@@ -302,15 +302,15 @@ function setResponseValueAndErrors(res, key, value, errorMessage, refs) {
   addErrorMessage(res, key, errorMessage, refs);
 }
 var init_errorMessages = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/errorMessages.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/errorMessages.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
+// ../../node_modules/zod-to-json-schema/dist/esm/getRelativePath.js
 var getRelativePath;
 var init_getRelativePath = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/getRelativePath.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/getRelativePath.js"() {
     "use strict";
     getRelativePath = (pathA, pathB) => {
       let i = 0;
@@ -323,7 +323,7 @@ var init_getRelativePath = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/any.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/any.js
 function parseAnyDef(refs) {
   if (refs.target !== "openAi") {
     return {};
@@ -339,13 +339,13 @@ function parseAnyDef(refs) {
   };
 }
 var init_any = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/any.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/any.js"() {
     "use strict";
     init_getRelativePath();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/array.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/array.js
 import { ZodFirstPartyTypeKind } from "zod/v3";
 function parseArrayDef(def, refs) {
   const res = {
@@ -370,14 +370,14 @@ function parseArrayDef(def, refs) {
   return res;
 }
 var init_array = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/array.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/array.js"() {
     "use strict";
     init_errorMessages();
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js
 function parseBigintDef(def, refs) {
   const res = {
     type: "integer",
@@ -423,39 +423,39 @@ function parseBigintDef(def, refs) {
   return res;
 }
 var init_bigint = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/bigint.js"() {
     "use strict";
     init_errorMessages();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js
 function parseBooleanDef() {
   return {
     type: "boolean"
   };
 }
 var init_boolean = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/boolean.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/branded.js
 function parseBrandedDef(_def, refs) {
   return parseDef(_def.type._def, refs);
 }
 var init_branded = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/branded.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/branded.js"() {
     "use strict";
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/catch.js
 var parseCatchDef;
 var init_catch = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/catch.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/catch.js"() {
     "use strict";
     init_parseDef();
     parseCatchDef = (def, refs) => {
@@ -464,7 +464,7 @@ var init_catch = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/date.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/date.js
 function parseDateDef(def, refs, overrideDateStrategy) {
   const strategy = overrideDateStrategy ?? refs.dateStrategy;
   if (Array.isArray(strategy)) {
@@ -490,7 +490,7 @@ function parseDateDef(def, refs, overrideDateStrategy) {
 }
 var integerDateParser;
 var init_date = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/date.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/date.js"() {
     "use strict";
     init_errorMessages();
     integerDateParser = (def, refs) => {
@@ -530,7 +530,7 @@ var init_date = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/default.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/default.js
 function parseDefaultDef(_def, refs) {
   return {
     ...parseDef(_def.innerType._def, refs),
@@ -538,25 +538,25 @@ function parseDefaultDef(_def, refs) {
   };
 }
 var init_default = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/default.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/default.js"() {
     "use strict";
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/effects.js
 function parseEffectsDef(_def, refs) {
   return refs.effectStrategy === "input" ? parseDef(_def.schema._def, refs) : parseAnyDef(refs);
 }
 var init_effects = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/effects.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/effects.js"() {
     "use strict";
     init_parseDef();
     init_any();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/enum.js
 function parseEnumDef(def) {
   return {
     type: "string",
@@ -564,12 +564,12 @@ function parseEnumDef(def) {
   };
 }
 var init_enum = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/enum.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/enum.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js
 function parseIntersectionDef(def, refs) {
   const allOf = [
     parseDef(def.left._def, {
@@ -607,7 +607,7 @@ function parseIntersectionDef(def, refs) {
 }
 var isJsonSchema7AllOfType;
 var init_intersection = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/intersection.js"() {
     "use strict";
     init_parseDef();
     isJsonSchema7AllOfType = (type) => {
@@ -618,7 +618,7 @@ var init_intersection = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/literal.js
 function parseLiteralDef(def, refs) {
   const parsedType = typeof def.value;
   if (parsedType !== "bigint" && parsedType !== "number" && parsedType !== "boolean" && parsedType !== "string") {
@@ -638,12 +638,12 @@ function parseLiteralDef(def, refs) {
   };
 }
 var init_literal = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/literal.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/literal.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/string.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 function parseStringDef(def, refs) {
   const res = {
     type: "string"
@@ -920,7 +920,7 @@ function stringifyRegExpWithFlags(regex, refs) {
 }
 var emojiRegex, zodPatterns, ALPHA_NUMERIC;
 var init_string = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/string.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/string.js"() {
     "use strict";
     init_errorMessages();
     emojiRegex = void 0;
@@ -975,7 +975,7 @@ var init_string = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/record.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/record.js
 import { ZodFirstPartyTypeKind as ZodFirstPartyTypeKind2 } from "zod/v3";
 function parseRecordDef(def, refs) {
   if (refs.target === "openAi") {
@@ -1028,7 +1028,7 @@ function parseRecordDef(def, refs) {
   return schema;
 }
 var init_record = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/record.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/record.js"() {
     "use strict";
     init_parseDef();
     init_string();
@@ -1037,7 +1037,7 @@ var init_record = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/map.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/map.js
 function parseMapDef(def, refs) {
   if (refs.mapStrategy === "record") {
     return parseRecordDef(def, refs);
@@ -1062,7 +1062,7 @@ function parseMapDef(def, refs) {
   };
 }
 var init_map = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/map.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/map.js"() {
     "use strict";
     init_parseDef();
     init_record();
@@ -1070,7 +1070,7 @@ var init_map = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js
 function parseNativeEnumDef(def) {
   const object3 = def.values;
   const actualKeys = Object.keys(def.values).filter((key) => {
@@ -1084,12 +1084,12 @@ function parseNativeEnumDef(def) {
   };
 }
 var init_nativeEnum = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/nativeEnum.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/never.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/never.js
 function parseNeverDef(refs) {
   return refs.target === "openAi" ? void 0 : {
     not: parseAnyDef({
@@ -1099,13 +1099,13 @@ function parseNeverDef(refs) {
   };
 }
 var init_never = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/never.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/never.js"() {
     "use strict";
     init_any();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/null.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/null.js
 function parseNullDef(refs) {
   return refs.target === "openApi3" ? {
     enum: ["null"],
@@ -1115,12 +1115,12 @@ function parseNullDef(refs) {
   };
 }
 var init_null = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/null.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/null.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/union.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/union.js
 function parseUnionDef(def, refs) {
   if (refs.target === "openApi3")
     return asAnyOf(def, refs);
@@ -1175,7 +1175,7 @@ function parseUnionDef(def, refs) {
 }
 var primitiveMappings, asAnyOf;
 var init_union = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/union.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/union.js"() {
     "use strict";
     init_parseDef();
     primitiveMappings = {
@@ -1195,7 +1195,7 @@ var init_union = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js
 function parseNullableDef(def, refs) {
   if (["ZodString", "ZodNumber", "ZodBigInt", "ZodBoolean", "ZodNull"].includes(def.innerType._def.typeName) && (!def.innerType._def.checks || !def.innerType._def.checks.length)) {
     if (refs.target === "openApi3") {
@@ -1227,14 +1227,14 @@ function parseNullableDef(def, refs) {
   return base && { anyOf: [base, { type: "null" }] };
 }
 var init_nullable = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/nullable.js"() {
     "use strict";
     init_parseDef();
     init_union();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/number.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/number.js
 function parseNumberDef(def, refs) {
   const res = {
     type: "number"
@@ -1283,13 +1283,13 @@ function parseNumberDef(def, refs) {
   return res;
 }
 var init_number = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/number.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/number.js"() {
     "use strict";
     init_errorMessages();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/object.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/object.js
 function parseObjectDef(def, refs) {
   const forceOptionalIntoNullable = refs.target === "openAi";
   const result = {
@@ -1359,16 +1359,16 @@ function safeIsOptional(schema) {
   }
 }
 var init_object = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/object.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/object.js"() {
     "use strict";
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/optional.js
 var parseOptionalDef;
 var init_optional = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/optional.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/optional.js"() {
     "use strict";
     init_parseDef();
     init_any();
@@ -1392,10 +1392,10 @@ var init_optional = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js
 var parsePipelineDef;
 var init_pipeline = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/pipeline.js"() {
     "use strict";
     init_parseDef();
     parsePipelineDef = (def, refs) => {
@@ -1419,18 +1419,18 @@ var init_pipeline = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/promise.js
 function parsePromiseDef(def, refs) {
   return parseDef(def.type._def, refs);
 }
 var init_promise = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/promise.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/promise.js"() {
     "use strict";
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/set.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/set.js
 function parseSetDef(def, refs) {
   const items = parseDef(def.valueType._def, {
     ...refs,
@@ -1450,14 +1450,14 @@ function parseSetDef(def, refs) {
   return schema;
 }
 var init_set = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/set.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/set.js"() {
     "use strict";
     init_errorMessages();
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js
 function parseTupleDef(def, refs) {
   if (def.rest) {
     return {
@@ -1485,40 +1485,40 @@ function parseTupleDef(def, refs) {
   }
 }
 var init_tuple = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/tuple.js"() {
     "use strict";
     init_parseDef();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js
 function parseUndefinedDef(refs) {
   return {
     not: parseAnyDef(refs)
   };
 }
 var init_undefined = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/undefined.js"() {
     "use strict";
     init_any();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js
 function parseUnknownDef(refs) {
   return parseAnyDef(refs);
 }
 var init_unknown = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/unknown.js"() {
     "use strict";
     init_any();
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js
 var parseReadonlyDef;
 var init_readonly = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parsers/readonly.js"() {
     "use strict";
     init_parseDef();
     parseReadonlyDef = (def, refs) => {
@@ -1527,11 +1527,11 @@ var init_readonly = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/selectParser.js
+// ../../node_modules/zod-to-json-schema/dist/esm/selectParser.js
 import { ZodFirstPartyTypeKind as ZodFirstPartyTypeKind3 } from "zod/v3";
 var selectParser;
 var init_selectParser = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/selectParser.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/selectParser.js"() {
     "use strict";
     init_any();
     init_array();
@@ -1640,7 +1640,7 @@ var init_selectParser = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parseDef.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parseDef.js
 function parseDef(def, refs, forceResolution = false) {
   const seenItem = refs.seen.get(def);
   if (refs.override) {
@@ -1672,7 +1672,7 @@ function parseDef(def, refs, forceResolution = false) {
 }
 var get$ref, addMeta;
 var init_parseDef = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parseDef.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parseDef.js"() {
     "use strict";
     init_Options();
     init_selectParser();
@@ -1706,17 +1706,17 @@ var init_parseDef = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parseTypes.js
+// ../../node_modules/zod-to-json-schema/dist/esm/parseTypes.js
 var init_parseTypes = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/parseTypes.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/parseTypes.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
+// ../../node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js
 var zodToJsonSchema;
 var init_zodToJsonSchema = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/zodToJsonSchema.js"() {
     "use strict";
     init_parseDef();
     init_Refs();
@@ -1784,7 +1784,7 @@ var init_zodToJsonSchema = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/index.js
+// ../../node_modules/zod-to-json-schema/dist/esm/index.js
 var esm_exports = {};
 __export(esm_exports, {
   addErrorMessage: () => addErrorMessage,
@@ -1834,7 +1834,7 @@ __export(esm_exports, {
 });
 var esm_default;
 var init_esm = __esm({
-  "../../node_modules/.pnpm/zod-to-json-schema@3.25.1_zod@4.3.6/node_modules/zod-to-json-schema/dist/esm/index.js"() {
+  "../../node_modules/zod-to-json-schema/dist/esm/index.js"() {
     "use strict";
     init_Options();
     init_Refs();
@@ -1879,7 +1879,7 @@ var init_esm = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/zod-Bwrt9trS.js
+// ../../node_modules/@standard-community/standard-json/dist/zod-Bwrt9trS.js
 var zod_Bwrt9trS_exports = {};
 __export(zod_Bwrt9trS_exports, {
   default: () => getToJsonSchemaFn6
@@ -1907,17 +1907,17 @@ async function getToJsonSchemaFn6() {
 }
 var zodv4Error;
 var init_zod_Bwrt9trS = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/zod-Bwrt9trS.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/zod-Bwrt9trS.js"() {
     "use strict";
     init_index_CLddUTqr();
     zodv4Error = new MissingDependencyError("zod v4");
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/index-CLddUTqr.js
+// ../../node_modules/@standard-community/standard-json/dist/index-CLddUTqr.js
 var validationMapper, UnsupportedVendorError, MissingDependencyError, getToJsonSchemaFn7, toJsonSchema;
 var init_index_CLddUTqr = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/index-CLddUTqr.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/index-CLddUTqr.js"() {
     "use strict";
     init_dist();
     validationMapper = /* @__PURE__ */ new Map();
@@ -1980,15 +1980,15 @@ var init_index_CLddUTqr = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/index.js
+// ../../node_modules/@standard-community/standard-json/dist/index.js
 var init_dist2 = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-json@0.3.5_@standard-schema+spec@1.1.0_@types+json-schema@_f89f0da8eb08fb1ae9b0ddcdc3aa8a2e/node_modules/@standard-community/standard-json/dist/index.js"() {
+  "../../node_modules/@standard-community/standard-json/dist/index.js"() {
     "use strict";
     init_index_CLddUTqr();
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/vendors/convert.js
+// ../../node_modules/@standard-community/standard-openapi/dist/vendors/convert.js
 function convertToOpenAPISchema(jsonSchema, context) {
   const _jsonSchema = JSON.parse(JSON.stringify(jsonSchema));
   if ("nullable" in _jsonSchema && _jsonSchema.nullable === true) {
@@ -2078,12 +2078,12 @@ function convertToOpenAPISchema(jsonSchema, context) {
   return _jsonSchema;
 }
 var init_convert = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/vendors/convert.js"() {
+  "../../node_modules/@standard-community/standard-openapi/dist/vendors/convert.js"() {
     "use strict";
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/valibot-D_HTw1Gn.js
+// ../../node_modules/@standard-community/standard-openapi/dist/valibot-D_HTw1Gn.js
 var valibot_D_HTw1Gn_exports = {};
 __export(valibot_D_HTw1Gn_exports, {
   default: () => getToOpenAPISchemaFn
@@ -2124,14 +2124,14 @@ function getToOpenAPISchemaFn() {
   };
 }
 var init_valibot_D_HTw1Gn = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/valibot-D_HTw1Gn.js"() {
+  "../../node_modules/@standard-community/standard-openapi/dist/valibot-D_HTw1Gn.js"() {
     "use strict";
     init_dist2();
     init_convert();
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/default-u_dwuiYb.js
+// ../../node_modules/@standard-community/standard-openapi/dist/default-u_dwuiYb.js
 var default_u_dwuiYb_exports = {};
 __export(default_u_dwuiYb_exports, {
   default: () => getToOpenAPISchemaFn2
@@ -2143,27 +2143,27 @@ function getToOpenAPISchemaFn2() {
   );
 }
 var init_default_u_dwuiYb = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/default-u_dwuiYb.js"() {
+  "../../node_modules/@standard-community/standard-openapi/dist/default-u_dwuiYb.js"() {
     "use strict";
     init_dist2();
     init_convert();
   }
 });
 
-// ../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/extendZodSymbols.chunk.mjs
+// ../../node_modules/zod-openapi/dist/extendZodSymbols.chunk.mjs
 var currentSymbol, previousSymbol;
 var init_extendZodSymbols_chunk = __esm({
-  "../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/extendZodSymbols.chunk.mjs"() {
+  "../../node_modules/zod-openapi/dist/extendZodSymbols.chunk.mjs"() {
     "use strict";
     currentSymbol = /* @__PURE__ */ Symbol("current");
     previousSymbol = /* @__PURE__ */ Symbol("previous");
   }
 });
 
-// ../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/components.chunk.mjs
+// ../../node_modules/zod-openapi/dist/components.chunk.mjs
 var isZodType, isAnyZodType, openApiVersions, satisfiesVersion, createDescriptionMetadata, isValueEqual, enhanceWithMetadata, createArraySchema, createBigIntSchema, createBooleanSchema, createBrandedSchema, createCatchSchema, createDateSchema, createDefaultSchema, createNativeEnumSchema, getValidEnumValues, sortStringsAndNumbers, createTransformSchema, createManualOutputTransformSchema, getZodTypeName, throwTransformError, resolveSingleEffect, resolveEffect, verifyEffects, flattenEffects, createDiscriminatedUnionSchema, unwrapLiterals, mapDiscriminator, createEnumSchema, createIntersectionSchema, flattenIntersection, createLazySchema, createNullSchema, createLiteralSchema, createManualTypeSchema, createNullableSchema, mapNullType, mapNullOf, createNumberSchema, mapMultipleOf, mapMaximum, mapMinimum, getZodNumberChecks, mapNumberType, createOptionalSchema, isOptionalObjectKey, createObjectSchema, createExtendedSchema, createDiffOpts, createShapeDiff, mapAdditionalProperties, createObjectSchemaFromShape, mapRequired, mapProperties, createPipelineSchema, createPreprocessSchema, createReadonlySchema, createRecordSchema, createRefineSchema, createSetSchema, createStringSchema, getZodStringChecks, mapPatterns, mapStartsWith, mapEndsWith, mapRegex, mapIncludes, mapStringFormat, mapContentEncoding, createTupleSchema, mapPrefixItems, createUnionSchema, createUnknownSchema, createSchemaSwitch, createNewSchema, createNewRef, createExistingRef, createSchemaOrRef, createSchemaObject, createSchema, createMediaTypeSchema, createMediaTypeObject, createContent, createComponentParamRef, createBaseParameter, createParamOrRef, createParameters, createRequestParams, createManualParameters, createParametersObject, getZodObject, isISpecificationExtension, createResponseHeaders, createHeaderOrRef, createBaseHeader, createComponentHeaderRef, createResponse, createResponses, createRequestBody, createOperation, createPathItem, createPaths, createCallback, createCallbacks, getDefaultComponents, getSchemas, getParameters, getHeaders, getResponses, getRequestBodies, getCallbacks, createComponentSchemaRef, createComponentResponseRef, createComponentRequestBodyRef, createComponentCallbackRef, createComponents, createSchemaComponents, createParamComponents, createHeaderComponents, createResponseComponents, createRequestBodiesComponents, createCallbackComponents;
 var init_components_chunk = __esm({
-  "../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/components.chunk.mjs"() {
+  "../../node_modules/zod-openapi/dist/components.chunk.mjs"() {
     "use strict";
     init_extendZodSymbols_chunk();
     isZodType = (zodType, typeName) => {
@@ -4621,7 +4621,7 @@ This may cause the schema to render incorrectly and is most likely a mistake. Yo
   }
 });
 
-// ../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/extendZod.chunk.mjs
+// ../../node_modules/zod-openapi/dist/extendZod.chunk.mjs
 function extendZodWithOpenApi(zod) {
   if (typeof zod.ZodType.prototype.openapi !== "undefined") {
     return;
@@ -4706,7 +4706,7 @@ function extendZodWithOpenApi(zod) {
 }
 var mergeOpenApi;
 var init_extendZod_chunk = __esm({
-  "../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/extendZod.chunk.mjs"() {
+  "../../node_modules/zod-openapi/dist/extendZod.chunk.mjs"() {
     "use strict";
     init_extendZodSymbols_chunk();
     mergeOpenApi = (openapi, {
@@ -4722,7 +4722,7 @@ var init_extendZod_chunk = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/index.mjs
+// ../../node_modules/zod-openapi/dist/index.mjs
 var dist_exports = {};
 __export(dist_exports, {
   createDocument: () => createDocument,
@@ -4733,7 +4733,7 @@ __export(dist_exports, {
 });
 var createDocument, createSchema2, oas30, oas31;
 var init_dist3 = __esm({
-  "../../node_modules/.pnpm/zod-openapi@4.2.4_zod@4.3.6/node_modules/zod-openapi/dist/index.mjs"() {
+  "../../node_modules/zod-openapi/dist/index.mjs"() {
     "use strict";
     init_components_chunk();
     init_extendZod_chunk();
@@ -4791,7 +4791,7 @@ var init_dist3 = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/zod-DSgpEGAE.js
+// ../../node_modules/@standard-community/standard-openapi/dist/zod-DSgpEGAE.js
 var zod_DSgpEGAE_exports = {};
 __export(zod_DSgpEGAE_exports, {
   default: () => getToOpenAPISchemaFn3
@@ -4826,7 +4826,7 @@ function getToOpenAPISchemaFn3() {
   };
 }
 var init_zod_DSgpEGAE = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/zod-DSgpEGAE.js"() {
+  "../../node_modules/@standard-community/standard-openapi/dist/zod-DSgpEGAE.js"() {
     "use strict";
     init_default_u_dwuiYb();
     init_index_DZEfthgZ();
@@ -4835,10 +4835,10 @@ var init_zod_DSgpEGAE = __esm({
   }
 });
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/index-DZEfthgZ.js
+// ../../node_modules/@standard-community/standard-openapi/dist/index-DZEfthgZ.js
 var errorMessageWrapper, openapiVendorMap, getToOpenAPISchemaFn4, toOpenAPISchema;
 var init_index_DZEfthgZ = __esm({
-  "../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/index-DZEfthgZ.js"() {
+  "../../node_modules/@standard-community/standard-openapi/dist/index-DZEfthgZ.js"() {
     "use strict";
     errorMessageWrapper = (message) => `standard-openapi: ${message}`;
     openapiVendorMap = /* @__PURE__ */ new Map();
@@ -4875,16 +4875,16 @@ var init_index_DZEfthgZ = __esm({
 
 // src/index.ts
 import { Hono } from "hono";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import "hono/jwt";
 import { logger } from "hono/logger";
 import { nanoid } from "nanoid";
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/index.js
+// ../../node_modules/postgres/src/index.js
 import os from "os";
 import fs from "fs";
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/query.js
+// ../../node_modules/postgres/src/query.js
 var originCache = /* @__PURE__ */ new Map();
 var originStackCache = /* @__PURE__ */ new Map();
 var originError = /* @__PURE__ */ Symbol("OriginError");
@@ -5021,7 +5021,7 @@ function cachedError(xs) {
   return originCache.get(xs);
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/errors.js
+// ../../node_modules/postgres/src/errors.js
 var PostgresError = class extends Error {
   constructor(x) {
     super(x.message);
@@ -5071,7 +5071,7 @@ function notSupported(x) {
   return error;
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/types.js
+// ../../node_modules/postgres/src/types.js
 var types = {
   string: {
     to: 25,
@@ -5357,14 +5357,14 @@ fromKebab.column = { to: fromKebab };
 var kebab = { ...toKebab };
 kebab.column.to = fromKebab;
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/connection.js
+// ../../node_modules/postgres/src/connection.js
 import net from "net";
 import tls from "tls";
 import crypto from "crypto";
 import Stream from "stream";
 import { performance } from "perf_hooks";
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/result.js
+// ../../node_modules/postgres/src/result.js
 var Result = class extends Array {
   constructor() {
     super();
@@ -5381,7 +5381,7 @@ var Result = class extends Array {
   }
 };
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/queue.js
+// ../../node_modules/postgres/src/queue.js
 var queue_default = Queue;
 function Queue(initial = []) {
   let xs = initial.slice();
@@ -5408,7 +5408,7 @@ function Queue(initial = []) {
   };
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/bytes.js
+// ../../node_modules/postgres/src/bytes.js
 var size = 256;
 var buffer = Buffer.allocUnsafe(size);
 var messages = "BCcDdEFfHPpQSX".split("").reduce((acc, x) => {
@@ -5481,7 +5481,7 @@ function reset() {
   return b;
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/connection.js
+// ../../node_modules/postgres/src/connection.js
 var connection_default = Connection;
 var uid = 1;
 var Sync = bytes_default().S().end();
@@ -6321,7 +6321,7 @@ function timer(fn, seconds) {
   }
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/subscribe.js
+// ../../node_modules/postgres/src/subscribe.js
 var noop2 = () => {
 };
 function Subscribe(postgres2, options) {
@@ -6533,7 +6533,7 @@ function parseEvent(x) {
   return (command || "*") + (path ? ":" + (path.indexOf(".") === -1 ? "public." + path : path) : "") + (key ? "=" + key : "");
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/large.js
+// ../../node_modules/postgres/src/large.js
 import Stream2 from "stream";
 function largeObject(sql, oid, mode = 131072 | 262144) {
   return new Promise(async (resolve, reject) => {
@@ -6599,7 +6599,7 @@ function largeObject(sql, oid, mode = 131072 | 262144) {
   });
 }
 
-// ../../node_modules/.pnpm/postgres@3.4.8/node_modules/postgres/src/index.js
+// ../../node_modules/postgres/src/index.js
 Object.assign(Postgres, {
   PostgresError,
   toPascal,
@@ -7009,106 +7009,70 @@ import { drizzle } from "drizzle-orm/postgres-js";
 var schema_exports = {};
 __export(schema_exports, {
   todoStatusEnum: () => todoStatusEnum,
-  todos: () => todos,
-  userRoleEnum: () => userRoleEnum,
-  users: () => users
+  todos: () => todos
 });
 import {
-  pgTable,
-  text,
-  boolean,
-  timestamp,
-  pgEnum,
-  uuid
+  pgTable as pgTable2,
+  text as text2,
+  boolean as boolean2,
+  timestamp as timestamp2,
+  pgEnum
 } from "drizzle-orm/pg-core";
-var userRoleEnum = pgEnum("user_role", ["user", "admin"]);
-var users = pgTable(
-  "users",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    email: text("email").notNull().unique(),
-    password: text("password").notNull(),
-    role: userRoleEnum("role").notNull().default("user"),
-    createdAt: timestamp("created_at").defaultNow().notNull()
-  }
-);
-var todoStatusEnum = pgEnum("todo_status", [
-  "todo",
-  "in-progress",
-  "backlog",
-  "completed",
-  "cancelled"
-]);
-var todos = pgTable("todoworker", {
-  id: text("id").primaryKey(),
-  title: text("title").notNull(),
-  description: text("description").notNull(),
-  status: todoStatusEnum("status").notNull().default("todo"),
-  completed: boolean("completed").notNull().default(false),
-  createdAt: timestamp("created_at", {
-    withTimezone: true,
-    mode: "date"
-  }).notNull().defaultNow(),
-  endAt: timestamp("end_at", {
-    withTimezone: true,
-    mode: "date"
-  })
-});
 
 // ../db/src/auth-schema.ts
 import { relations } from "drizzle-orm";
-import { pgTable as pgTable2, text as text2, timestamp as timestamp2, boolean as boolean2, index } from "drizzle-orm/pg-core";
-var user = pgTable2("user", {
-  id: text2("id").primaryKey(),
-  name: text2("name").notNull(),
-  email: text2("email").notNull().unique(),
-  emailVerified: boolean2("email_verified").default(false).notNull(),
-  image: text2("image"),
-  createdAt: timestamp2("created_at").defaultNow().notNull(),
-  updatedAt: timestamp2("updated_at").defaultNow().$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
+import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+var user = pgTable("user", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").default(false).notNull(),
+  image: text("image"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
 });
-var session = pgTable2(
+var session = pgTable(
   "session",
   {
-    id: text2("id").primaryKey(),
-    expiresAt: timestamp2("expires_at").notNull(),
-    token: text2("token").notNull().unique(),
-    createdAt: timestamp2("created_at").defaultNow().notNull(),
-    updatedAt: timestamp2("updated_at").$onUpdate(() => /* @__PURE__ */ new Date()).notNull(),
-    ipAddress: text2("ip_address"),
-    userAgent: text2("user_agent"),
-    userId: text2("user_id").notNull().references(() => user.id, { onDelete: "cascade" })
+    id: text("id").primaryKey(),
+    expiresAt: timestamp("expires_at").notNull(),
+    token: text("token").notNull().unique(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").$onUpdate(() => /* @__PURE__ */ new Date()).notNull(),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" })
   },
   (table) => [index("session_userId_idx").on(table.userId)]
 );
-var account = pgTable2(
+var account = pgTable(
   "account",
   {
-    id: text2("id").primaryKey(),
-    accountId: text2("account_id").notNull(),
-    providerId: text2("provider_id").notNull(),
-    userId: text2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
-    accessToken: text2("access_token"),
-    refreshToken: text2("refresh_token"),
-    idToken: text2("id_token"),
-    accessTokenExpiresAt: timestamp2("access_token_expires_at"),
-    refreshTokenExpiresAt: timestamp2("refresh_token_expires_at"),
-    scope: text2("scope"),
-    password: text2("password"),
-    createdAt: timestamp2("created_at").defaultNow().notNull(),
-    updatedAt: timestamp2("updated_at").$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
+    id: text("id").primaryKey(),
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at"),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+    scope: text("scope"),
+    password: text("password"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
   },
   (table) => [index("account_userId_idx").on(table.userId)]
 );
-var verification = pgTable2(
+var verification = pgTable(
   "verification",
   {
-    id: text2("id").primaryKey(),
-    identifier: text2("identifier").notNull(),
-    value: text2("value").notNull(),
-    expiresAt: timestamp2("expires_at").notNull(),
-    createdAt: timestamp2("created_at").defaultNow().notNull(),
-    updatedAt: timestamp2("updated_at").defaultNow().$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
+    id: text("id").primaryKey(),
+    identifier: text("identifier").notNull(),
+    value: text("value").notNull(),
+    expiresAt: timestamp("expires_at").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => /* @__PURE__ */ new Date()).notNull()
   },
   (table) => [index("verification_identifier_idx").on(table.identifier)]
 );
@@ -7129,7 +7093,29 @@ var accountRelations = relations(account, ({ one }) => ({
   })
 }));
 
+// ../db/src/schema.ts
+var todoStatusEnum = pgEnum("todo_status", [
+  "todo",
+  "in-progress",
+  "backlog",
+  "completed",
+  "cancelled"
+]);
+var todos = pgTable2("todoworker", {
+  id: text2("id").primaryKey(),
+  userId: text2("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  title: text2("title").notNull(),
+  description: text2("description").notNull(),
+  status: todoStatusEnum("status").notNull().default("todo"),
+  completed: boolean2("completed").notNull().default(false),
+  createdAt: timestamp2("created_at", { withTimezone: true, mode: "date" }).notNull().defaultNow(),
+  endAt: timestamp2("end_at", { withTimezone: true, mode: "date" }).notNull(),
+  completedAt: timestamp2("completed_at", { withTimezone: true, mode: "date" })
+});
+
 // ../db/src/index.ts
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
 var db = null;
 function getDb() {
   if (db) return db;
@@ -7165,50 +7151,37 @@ var TodoSchema = z.object({
   description: z.string(),
   status: TodoStatusEnum,
   completed: z.boolean(),
-  createdAt: z.coerce.date(),
-  endAt: z.coerce.date().nullable()
+  createdAt: z.string(),
+  endAt: z.string().nullable(),
+  completedAt: z.string().nullable()
 });
 var CreateTodoFormSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
+  title: z.string().min(1, "Title is required !"),
+  description: z.string().min(1, "Don't you know about your task!!"),
   dueDate: z.date(),
-  dueTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/, "Time must be HH:mm:ss")
+  dueTime: z.string().regex(
+    /^([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$/,
+    "Time must be HH:mm or HH:mm:ss"
+  )
 });
-var CreateTodoSchema = CreateTodoFormSchema.transform((data) => {
-  const parts = data.dueTime.split(":");
-  const h = Number(parts[0]);
-  const m = Number(parts[1]);
-  const s = Number(parts[2]);
-  const end = new Date(data.dueDate);
-  end.setHours(h, m, s, 0);
-  return {
-    title: data.title,
-    description: data.description,
-    status: "todo",
-    completed: false,
-    createdAt: /* @__PURE__ */ new Date(),
-    endAt: end
-  };
+var CreateTodoSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  endAt: z.string().datetime()
 });
-var RegisterSchema = z.object(
-  {
-    email: z.string().email(),
-    password: z.string().min(8),
-    role: z.enum(["user", "admin"])
-  }
-);
-var UserResponseSchema = z.object(
-  {
-    success: z.boolean(),
-    user: z.object({
-      id: z.string().uuid(),
-      email: z.string().email(),
-      password: z.string(),
-      role: z.enum(["user", "admin"]),
-      createdAt: z.string().datetime()
-    })
-  }
-);
+var RegisterSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.email("Invalid email address").toLowerCase().trim(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Confirm your password")
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"]
+});
+var LoginSchema = z.object({
+  email: z.email("Invalid email address").toLowerCase().trim(),
+  password: z.string().min(6, "Password must be at least 6 characters")
+});
 var ErrorSchema = z.object({
   error: z.string()
 });
@@ -7225,13 +7198,10 @@ var sessionResponseSchema = z.object({
   })
 });
 
-// src/index.ts
-import "hono/cookie";
-
-// ../../node_modules/.pnpm/hono-openapi@1.2.0_@hono+standard-validator@0.2.2_@standard-schema+spec@1.1.0_hono@4.11_faa345e172b6c4f28c11705edf9db2c1/node_modules/hono-openapi/dist/index.js
+// ../../node_modules/hono-openapi/dist/index.js
 import { findTargetHandler } from "hono/utils/handler";
 
-// ../../node_modules/.pnpm/@hono+standard-validator@0.2.2_@standard-schema+spec@1.1.0_hono@4.11.8/node_modules/@hono/standard-validator/dist/index.js
+// ../../node_modules/@hono/standard-validator/dist/index.js
 import { validator } from "hono/validator";
 var RESTRICTED_DATA_FIELDS = { header: ["cookie"] };
 function sanitizeIssues(issues, vendor, target) {
@@ -7290,13 +7260,13 @@ var sValidator = (target, schema, hook) => validator(target, async (value, c) =>
   return result.value;
 });
 
-// ../../node_modules/.pnpm/hono-openapi@1.2.0_@hono+standard-validator@0.2.2_@standard-schema+spec@1.1.0_hono@4.11_faa345e172b6c4f28c11705edf9db2c1/node_modules/hono-openapi/dist/index.js
+// ../../node_modules/hono-openapi/dist/index.js
 init_dist2();
 
-// ../../node_modules/.pnpm/@standard-community+standard-openapi@0.2.9_@standard-community+standard-json@0.3.5_@sta_64dc72374920719b5ebc9a639a523d47/node_modules/@standard-community/standard-openapi/dist/index.js
+// ../../node_modules/@standard-community/standard-openapi/dist/index.js
 init_index_DZEfthgZ();
 
-// ../../node_modules/.pnpm/hono-openapi@1.2.0_@hono+standard-validator@0.2.2_@standard-schema+spec@1.1.0_hono@4.11_faa345e172b6c4f28c11705edf9db2c1/node_modules/hono-openapi/dist/index.js
+// ../../node_modules/hono-openapi/dist/index.js
 var uniqueSymbol = /* @__PURE__ */ Symbol("openapi");
 var ALLOWED_METHODS = [
   "GET",
@@ -7762,7 +7732,7 @@ function describeRoute(spec) {
   });
 }
 
-// ../../node_modules/.pnpm/@scalar+core@0.3.38/node_modules/@scalar/core/dist/libs/html-rendering/html-rendering.js
+// ../../node_modules/@scalar/core/dist/libs/html-rendering/html-rendering.js
 var addIndent = (str, spaces = 2, initialIndent = false) => {
   const indent = " ".repeat(spaces);
   const lines = str.split("\n");
@@ -7854,7 +7824,7 @@ var getConfiguration = (givenConfiguration) => {
   return configuration;
 };
 
-// ../../node_modules/.pnpm/@scalar+hono-api-reference@0.9.41_hono@4.11.8/node_modules/@scalar/hono-api-reference/dist/scalar.js
+// ../../node_modules/@scalar/hono-api-reference/dist/scalar.js
 var DEFAULT_CONFIGURATION = {
   _integration: "hono"
 };
@@ -8574,8 +8544,45 @@ var expoAuthorizationProxy = createAuthEndpoint("/expo-authorization-proxy", {
   await ctx.setSignedCookie(stateCookie.name, state, ctx.context.secret, stateCookie.attributes);
   return ctx.redirect(ctx.query.authorizationURL);
 });
+var expo = (options) => {
+  return {
+    id: "expo",
+    init: (ctx) => {
+      return { options: { trustedOrigins: process.env.NODE_ENV === "development" ? ["exp://"] : [] } };
+    },
+    async onRequest(request, ctx) {
+      if (options?.disableOriginOverride || request.headers.get("origin")) return;
+      const expoOrigin = request.headers.get("expo-origin");
+      if (!expoOrigin) return;
+      const req = request.clone();
+      req.headers.set("origin", expoOrigin);
+      return { request: req };
+    },
+    hooks: { after: [{
+      matcher(context) {
+        return !!(context.path?.startsWith("/callback") || context.path?.startsWith("/oauth2/callback") || context.path?.startsWith("/magic-link/verify") || context.path?.startsWith("/verify-email"));
+      },
+      handler: createAuthMiddleware(async (ctx) => {
+        const headers = ctx.context.responseHeaders;
+        const location = headers?.get("location");
+        if (!location) return;
+        if (location.includes("/oauth-proxy-callback")) return;
+        if (!ctx.context.trustedOrigins.filter((origin) => !origin.startsWith("http")).some((origin) => location?.startsWith(origin))) return;
+        const cookie = headers?.get("set-cookie");
+        if (!cookie) return;
+        const url = new URL(location);
+        url.searchParams.set("cookie", cookie);
+        ctx.setHeader("location", url.toString());
+      })
+    }] },
+    endpoints: { expoAuthorizationProxy },
+    options
+  };
+};
 
 // src/auth.ts
+console.log("BETTER_AUTH_SECRET:", process.env.BETTER_AUTH_SECRET);
+console.log("BETTER_AUTH_URL:", process.env.BETTER_AUTH_URL);
 var auth = betterAuth({
   database: drizzleAdapter(getDb(), {
     provider: "pg",
@@ -8593,13 +8600,17 @@ var auth = betterAuth({
     "http://localhost:3001",
     "https://todo-better-auth-standalone-server-sage.vercel.app",
     "https://todo-better-auth-standalone-web.vercel.app",
-    "my-expo-app://"
+    "my-expo-app://",
+    "exp://**",
+    "http://192.168.1.16:3000",
+    "http://192.168.1.5:3000"
   ],
+  plugins: [expo()],
   advanced: {
     crossOriginCookies: true,
-    trustedProxyHeaders: true,
+    //trustedProxyHeaders: true,
     defaultCookieAttributes: {
-      sameSite: "none",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "Lax",
       secure: process.env.NODE_ENV === "production",
       httpOnly: true
     }
@@ -8610,11 +8621,24 @@ var auth = betterAuth({
 
 // src/index.ts
 import { cors } from "hono/cors";
+import "@hono/node-server";
+var UpdateStatusSchema = z3.object({
+  status: TodoStatusEnum
+});
 var app = new Hono().basePath("/api");
+app.use("*", logger());
 app.use(
   "*",
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://192.168.1.16:3000",
+      "http://192.168.1.5:3000",
+      "my-expo-app://",
+      "https://todo-better-auth-standalone-server-sage.vercel.app",
+      "https://todo-better-auth-standalone-web.vercel.app"
+    ],
     allowHeaders: ["Content-Type", "Authorization", "Cookie"],
     allowMethods: ["POST", "GET", "OPTIONS", "PATCH", "DELETE"],
     credentials: true
@@ -8624,8 +8648,26 @@ app.get("/health", (c) => c.json({ status: "ok" }));
 app.all("/auth/*", (c) => {
   return auth.handler(c.req.raw);
 });
-app.use("*", logger());
-var hour = 60 * 60;
+app.use(async (c, next) => {
+  const session2 = await auth.api.getSession({ headers: c.req.raw.headers });
+  console.log("Session:", JSON.stringify(session2));
+  if (!session2) {
+    c.set("user", null);
+    c.set("session", null);
+    await next();
+    return;
+  }
+  c.set("user", session2.user);
+  await next();
+});
+var authGuard = async (c, next) => {
+  const user2 = c.get("user");
+  console.log("user in server:", user2);
+  if (!user2) {
+    return c.json({ error: "Unauthorised user" }, 401);
+  }
+  await next();
+};
 app.get(
   "/todos",
   describeRoute({
@@ -8647,11 +8689,17 @@ app.get(
       }
     }
   }),
-  //authGuard,
+  authGuard,
   async (c) => {
     const db2 = getDb();
-    const data = await db2.select().from(todos);
-    return c.json(TodoSchema.array().parse(data));
+    const user2 = c.get("user");
+    const data = await db2.select().from(todos).where(eq(todos.userId, user2.id));
+    return c.json(TodoSchema.array().parse(data.map((row) => ({
+      ...row,
+      createdAt: row.createdAt.toISOString(),
+      endAt: row.endAt?.toISOString() ?? null,
+      completedAt: row.completedAt?.toISOString() ?? null
+    }))));
   }
 );
 app.post(
@@ -8681,22 +8729,31 @@ app.post(
       }
     }
   }),
-  validator2("json", CreateTodoFormSchema),
-  // authGuard,
+  validator2("json", CreateTodoSchema),
+  authGuard,
   async (c) => {
     const db2 = getDb();
     const body = c.req.valid("json");
-    const parsed = CreateTodoSchema.parse(body);
+    const user2 = c.get("user");
+    if (!user2) return c.json({ error: "Unauthorized" }, 401);
     const [row] = await db2.insert(todos).values({
       id: nanoid(),
-      ...parsed
+      userId: user2.id,
+      title: body.title,
+      description: body.description,
+      endAt: new Date(body.endAt),
+      status: "todo",
+      completed: false,
+      createdAt: /* @__PURE__ */ new Date()
     }).returning();
-    return c.json(TodoSchema.parse(row), 201);
+    return c.json(TodoSchema.parse({
+      ...row,
+      createdAt: row?.createdAt.toISOString(),
+      endAt: row?.endAt?.toISOString(),
+      completedAt: row?.completedAt?.toISOString() ?? null
+    }), 201);
   }
 );
-var UpdateStatusSchema = z3.object({
-  status: TodoStatusEnum
-});
 app.patch(
   "/todos/:id/status",
   describeRoute({
@@ -8731,16 +8788,26 @@ app.patch(
     }
   }),
   validator2("json", UpdateStatusSchema),
-  // authGuard,
+  authGuard,
   async (c) => {
     const db2 = getDb();
     const { id } = c.req.param();
     const { status } = c.req.valid("json");
-    const [row] = await db2.update(todos).set({ status, completed: status === "completed" }).where(eq(todos.id, id)).returning();
+    const user2 = c.get("user");
+    const [row] = await db2.update(todos).set({
+      status,
+      completed: status === "completed",
+      completedAt: status === "completed" ? /* @__PURE__ */ new Date() : null
+    }).where(and(eq(todos.id, id), eq(todos.userId, user2.id))).returning();
     if (!row) {
       return c.json({ message: "Not found" }, 404);
     }
-    return c.json(TodoSchema.parse(row));
+    return c.json(TodoSchema.parse({
+      ...row,
+      createdAt: row.createdAt.toISOString(),
+      endAt: row.endAt?.toISOString() ?? null,
+      completedAt: row.completedAt?.toISOString() ?? null
+    }));
   }
 );
 app.delete(
@@ -8770,11 +8837,12 @@ app.delete(
       }
     }
   }),
-  //authGuard,
+  authGuard,
   async (c) => {
     const db2 = getDb();
     const { id } = c.req.param();
-    const result = await db2.delete(todos).where(eq(todos.id, id)).returning();
+    const user2 = c.get("user");
+    const result = await db2.delete(todos).where(and(eq(todos.id, id), eq(todos.userId, user2.id))).returning();
     if (!result.length) {
       return c.json({ message: "Not found" }, 404);
     }

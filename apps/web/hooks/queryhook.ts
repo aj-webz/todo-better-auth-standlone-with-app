@@ -1,105 +1,76 @@
 "use client";
-import z from "zod"
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
+import { $api } from "@/lib/api-client";
+import type { paths } from "@/lib/api-client";
 
-import {
-  type Todo,
-  type CreateTodoFormInput,
-  TodoStatusEnum,
-} from "@repo/shared";
+type Todo = paths["/api/todos"]["get"]["responses"][200]["content"]["application/json"][number];
 
-import {
-  readTodos,
-  createTodo,
-  updateTodoStatus,
-  deleteTodo,
-} from "../lib/todo.services";
-
-import { queryKey } from "./queryKey";
-
+const todosQueryKey = $api.queryOptions("get", "/api/todos").queryKey;
 
 export function useTodoQuery() {
-  return useQuery<Todo[]>({
-    queryKey: queryKey.all,
-    queryFn: readTodos,
+  return $api.useQuery("get", "/api/todos", undefined, {
     staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
   });
 }
-
 
 export function useCreateTodo() {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (input: CreateTodoFormInput) =>
-      createTodo(input),
-
+  return $api.useMutation("post", "/api/todos", {
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: queryKey.all,
-      });
+      queryClient.invalidateQueries({ queryKey: todosQueryKey });
     },
   });
 }
 
-
 export function useUpdateTodoStatus() {
   const queryClient = useQueryClient();
-type TodoStatus = z.infer<typeof TodoStatusEnum>;
-  
-  return useMutation({
-    mutationFn: ({
-      id,
-      status,
-    }: {
-      id: string;
-      status: TodoStatus;
-    }) => updateTodoStatus(id, status),
 
-    
-    onMutate: async ({ id, status }) => {
-      await queryClient.cancelQueries({ queryKey: queryKey.all });
+  return $api.useMutation("patch", "/api/todos/{id}/status", {
+    onMutate: async ({ params, body }) => {
+      await queryClient.cancelQueries({ queryKey: todosQueryKey });
 
-      const previousTodos = queryClient.getQueryData<Todo[]>(queryKey.all);
+      const previousTodos = queryClient.getQueryData<Todo[]>(todosQueryKey);
 
       if (previousTodos) {
-        queryClient.setQueryData<Todo[]>(queryKey.all, (old) =>
-          old?.map((todo) => (todo.id === id ? { ...todo, status } : todo))
+        queryClient.setQueryData<Todo[]>(todosQueryKey, (old) =>
+          old?.map((todo) =>
+            todo.id === params.path.id
+              ? {
+                  ...todo,
+                  status: body?.status ?? todo.status,
+                  completed: body?.status === "completed",        
+                  completedAt: body?.status === "completed"
+                    ? new Date().toISOString()
+                    : null,
+                }
+              : todo
+          )
         );
       }
 
       return { previousTodos };
     },
 
-    
-    onError: (err, variables, context) => {
+    onError: (_err, _vars, context) => {
       if (context?.previousTodos) {
-        queryClient.setQueryData(queryKey.all, context.previousTodos);
+        queryClient.setQueryData(todosQueryKey, context.previousTodos);
       }
     },
 
-    
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: queryKey.all });
+      queryClient.invalidateQueries({ queryKey: todosQueryKey });
     },
   });
 }
 
-
 export function useDeleteTodo() {
   const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: (id: string) => deleteTodo(id),
-
+  return $api.useMutation("delete", "/api/todos/{id}", {
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: queryKey.all,
-      });
+      queryClient.invalidateQueries({ queryKey: todosQueryKey });
     },
   });
 }

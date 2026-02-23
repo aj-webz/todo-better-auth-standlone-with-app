@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { eq } from "drizzle-orm";
+import { eq ,and} from "drizzle-orm";
 import { sign, verify } from "hono/jwt";
 import { logger } from "hono/logger";
 import { nanoid } from "nanoid";
@@ -9,42 +9,52 @@ import type { Context, Next } from "hono"
 import * as z from "zod";
 import {
   CreateTodoSchema,
-  CreateTodoFormSchema,
   TodoSchema,
   TodoStatusEnum,
   LoginSchema,
   RegisterSchema,
-  UserResponseSchema,
+  //UserResponseSchema,
   sessionResponseSchema,ErrorSchema,MessageSchema,
 } from "@repo/shared";
-import {
-  deleteCookie,
-  getCookie,
-  setCookie,
-} from 'hono/cookie';
+// import {
+//   deleteCookie,
+//   getCookie,
+//   setCookie,
+// } from 'hono/cookie';
 import { describeRoute, resolver, validator } from "hono-openapi";
 import { openAPIRouteHandler } from "hono-openapi";
 import { Scalar } from "@scalar/hono-api-reference"
 import { auth } from "./auth";
 import { cors } from "hono/cors";
-
+import { serve } from "@hono/node-server";
 
 
 
 type Variables = {
   user: typeof auth.$Infer.Session.user | null;
   session :typeof auth.$Infer.Session.session | null;
-}
+};
+const UpdateStatusSchema = z.object({
+  status: TodoStatusEnum,
+});
 
 const app = new Hono<{ Variables: Variables }>().basePath("/api")
 
 
-
+app.use("*", logger());
 
 app.use(
   "*", 
   cors({
-    origin: "http://localhost:3000", 
+     origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://192.168.1.16:3000",
+      "http://192.168.1.5:3000",
+      "my-expo-app://",           
+      "https://todo-better-auth-standalone-server-sage.vercel.app",
+      "https://todo-better-auth-standalone-web.vercel.app",
+    ],
     allowHeaders: ["Content-Type","Authorization","Cookie"],
     allowMethods: ["POST", "GET", "OPTIONS","PATCH","DELETE"],
     credentials: true,
@@ -59,27 +69,25 @@ app.all("/auth/*",(c)=>
 })
 
 
-app.use("*", logger());
-
-const hour = 60 * 60;
 
 
-// app.use("*", async(c,next)=>
-// {
-//   const session = await auth.api.getSession({headers:c.req.raw.headers});
-//   if(!session)
-//   {
-//     c.set("user",null);
-//     c.set("session",null);
-//     await next();
-//     return;
-//   }
-//   c.set("user",session.user);
-//   //c.set("session",session.session);
-//   await next();
-// });
+//const hour = 60 * 60;
 
 
+app.use( async(c,next)=>
+{
+  const session = await auth.api.getSession({headers:c.req.raw.headers});
+  console.log("Session:", JSON.stringify(session));
+  if(!session)
+  {
+    c.set("user",null);
+    c.set("session",null);
+    await next();
+    return;
+  }
+  c.set("user",session.user);
+  await next();
+});
 
 
 // function getJwtSecret() {
@@ -316,14 +324,13 @@ const hour = 60 * 60;
 
 
 const authGuard = async (c: Context, next: Next) => {
-  const session = await auth.api.getSession({ headers: c.req.raw.headers });
-  if (!session?.user) {
-    return c.json({ error: "Unauthorized user" }, 401);
-  }
-  c.set("user", session.user);
-  
-// c.set("session",session.session);
-  await next();
+const user = c.get("user");
+console.log("user in server:", user)
+if(!user)
+{
+  return c.json({error:"Unauthorised user"}, 401);
+}
+await next();
 };
 
 
@@ -348,16 +355,17 @@ app.get(
       },
     },
   }),
-  //authGuard,
+  authGuard,
   async (c) => {
     const db = getDb();
-    // const user = c.get("user");
-    // if(!user)
-    // {
-    //   return c.json({message:"Unauthorized access"},401);
-    // }
-    const data = await db.select().from(todos);
-    return c.json(TodoSchema.array().parse(data));
+    const user = c.get("user");
+    const data = await db.select().from(todos).where(eq(todos.userId,user!.id));
+    return c.json(TodoSchema.array().parse(data.map((row)=>({
+      ...row,
+    createdAt: row.createdAt.toISOString(),
+    endAt: row.endAt?.toISOString() ?? null,
+    completedAt: row.completedAt?.toISOString() ?? null,
+    }))));
   }
 );
 
@@ -389,79 +397,99 @@ app.post(
       },
     },
   }),
-  validator("json", CreateTodoFormSchema),
- // authGuard,
+  validator("json", CreateTodoSchema),
+  authGuard,
   async (c) => {
     const db = getDb();
     const body = c.req.valid("json");
-    const parsed = CreateTodoSchema.parse(body);
-
+    const user = c.get("user");
+    if (!user) return c.json({ error: "Unauthorized" }, 401);
     const [row] = await db.insert(todos).values({
-      id: nanoid(),
-      ...parsed,
+      id :nanoid(),
+      userId: user.id,
+      title :body.title,
+      description :body.description,
+      endAt: new Date(body.endAt),
+      status :"todo" as const,
+      completed :false,
+      createdAt :new Date(),
     }).returning();
 
-    return c.json(TodoSchema.parse(row), 201);
+    return c.json(TodoSchema.parse({
+      ...row,
+      createdAt:row?.createdAt.toISOString(),
+      endAt: row?.endAt?.toISOString(),
+      completedAt: row?.completedAt?.toISOString() ?? null,
+    }), 201);
   }
 );
 
 
-const UpdateStatusSchema = z.object({
-  status: TodoStatusEnum,
-});
 
-app.patch(
-  "/todos/:id/status",
-  describeRoute({
-    description: "Update todo status",
-    responses: {
-      200: {
-        description: "Updated",
-        content: {
-          "application/json": {
-            schema: resolver(TodoSchema),
+
+  app.patch(
+    "/todos/:id/status",
+    describeRoute({
+      description: "Update todo status",
+      responses: {
+        200: {
+          description: "Updated",
+          content: {
+            "application/json": {
+              schema: resolver(TodoSchema),
+            },
+          },
+        },
+        400: {
+          description: "Invalid status",
+          content: {
+            "application/json": { schema: resolver(ErrorSchema) },
+          },
+        },
+        404: {
+          description: "Todo not found",
+          content: {
+            "application/json": { schema: resolver(MessageSchema) },
+          },
+        },
+        401: {
+          description: "Unauthorized",
+          content: {
+            "application/json": { schema: resolver(ErrorSchema) },
           },
         },
       },
-      400: {
-        description: "Invalid status",
-        content: {
-          "application/json": { schema: resolver(ErrorSchema) },
-        },
-      },
-      404: {
-        description: "Todo not found",
-        content: {
-          "application/json": { schema: resolver(MessageSchema) },
-        },
-      },
-      401: {
-        description: "Unauthorized",
-        content: {
-          "application/json": { schema: resolver(ErrorSchema) },
-        },
-      },
-    },
-  }),
-  validator("json", UpdateStatusSchema),
- // authGuard,
-  async (c) => {
-    const db = getDb();
-    const { id } = c.req.param();
-    const { status } = c.req.valid("json");
+    }),
+    validator("json", UpdateStatusSchema),
+    authGuard,
+    async (c) => {
+  const db = getDb();
+  const { id } = c.req.param();
+  const { status } = c.req.valid("json");
+  const user = c.get("user");
 
-    const [row] = await db.update(todos)
-      .set({ status, completed: status === "completed" })
-      .where(eq(todos.id, id))
-      .returning();
+  const [row] = await db.update(todos)
+    .set({
+      status,
+      completed: status === "completed",
+      completedAt: status === "completed" ? new Date() : null,
+    })
+    .where(and(eq(todos.id, id), eq(todos.userId, user!.id)))
+    .returning();
 
-    if (!row) {
-      return c.json({ message: "Not found" }, 404);
-    }
-
-    return c.json(TodoSchema.parse(row));
+  if (!row) {
+    return c.json({ message: "Not found" }, 404);
   }
-);
+
+
+  return c.json(TodoSchema.parse({
+    ...row,
+    createdAt: row.createdAt.toISOString(),
+    endAt: row.endAt?.toISOString() ?? null,
+    completedAt: row.completedAt?.toISOString() ?? null,
+  }));
+}
+  );
 
 
 app.delete(
@@ -491,12 +519,12 @@ app.delete(
       },
     },
   }),
- //authGuard,
+  authGuard,
   async (c) => {
     const db = getDb();
     const { id } = c.req.param();
-
-    const result = await db.delete(todos).where(eq(todos.id, id)).returning();
+    const user = c.get("user");
+    const result = await db.delete(todos).where(and(eq(todos.id, id),eq(todos.userId,user!.id))).returning();
     if (!result.length) {
       return c.json({ message: "Not found" }, 404);
     }
@@ -521,7 +549,13 @@ app.get("/scalar-docs",Scalar((c)=>({
   layout:"modern",
 })))
 
-
+// serve({
+//   fetch: app.fetch,
+//   port: 3001,
+//   hostname: "0.0.0.0", 
+// }, (info) => {
+//   console.log(`Server running on http://localhost:${info.port}`)
+// })
 
 
 export { app };

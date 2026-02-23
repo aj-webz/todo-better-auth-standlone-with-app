@@ -1,40 +1,37 @@
-
-import { View, Text, TouchableOpacity } from "react-native";
-import { authClient } from "@/lib/authClient"
+import { View, Text, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { AddTodoButton, CreateTodoSheet } from "@/components/TodoSheet";
+import TodoList from "@/components/TodoList";
+import CardLayout from "@/components/DashStatus";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useRef } from "react";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 export default function PrivateScreen() {
-  const { data: session } = authClient.useSession();
-
-  const handleSignOut = async () => {
-    await authClient.signOut();
-  };
+  const insets = useSafeAreaInsets();
+  const sheetRef = useRef<BottomSheet>(null);
 
   return (
-    <View className="flex-1 justify-center items-center px-6 bg-white">
+    <SafeAreaView className="flex-1 bg-white">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="flex-1 px-6">
+          <View className="p-20 items-center">
+            <Text className="text-2.5xl font-semibold tracking-widest text-indigo-900 uppercase mb-2">
+              Have a <Text className="text-xl text-indigo-400">Great day!</Text>
+            </Text>
+          </View>
+          <CardLayout />
+          <TodoList />
+        </View>
+      </ScrollView>
 
-    
-      <View className="w-20 h-20 rounded-full bg-black items-center justify-center mb-4">
-        <Text className="text-white text-3xl font-bold">
-          {session?.user.name?.charAt(0).toUpperCase()}
-        </Text>
+      
+      <View style={{ position: "absolute", right: 24, bottom: insets.bottom + 16 }}>
+        <AddTodoButton onPress={() => sheetRef.current?.expand()} />
       </View>
 
-    
-      <Text className="text-2xl font-bold text-black mb-1">
-        {session?.user.name}
-      </Text>
-      <Text className="text-sm text-gray-500 mb-12">
-        {session?.user.email}
-      </Text>
-
-   
-      <TouchableOpacity
-        className="bg-red-500 py-4 rounded-xl w-full items-center"
-        onPress={handleSignOut}
-      >
-        <Text className="text-white font-semibold text-base">Sign Out</Text>
-      </TouchableOpacity>
-
-    </View>
+  
+      <CreateTodoSheet sheetRef={sheetRef} />
+    </SafeAreaView>
   );
 }

@@ -1,77 +1,53 @@
 import { z } from "zod";
 
-
 const TodoStatusEnum = z.enum([
-  "todo",
-  "in-progress",
-  "backlog",
-  "completed",
-  "cancelled",
+  "todo","in-progress","backlog","completed","cancelled",
 ]);
 
 
 const TodoSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  status: TodoStatusEnum,
-  completed: z.boolean(),
-  createdAt: z.coerce.date(),
-  endAt: z.coerce.date().nullable(),
-});
-
+  id :z.string(),
+  title :z.string(),
+  description :z.string(),
+  status :TodoStatusEnum,
+  completed :z.boolean(),
+  createdAt :z.string(),
+  endAt :z.string().nullable(),
+  completedAt:z.string().nullable(),
+})
 
 const CreateTodoFormSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-  dueDate: z.date(),
-  dueTime: z
-    .string()
-    .regex(/^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/, "Time must be HH:mm:ss"),
+  title :z.string().min(1, "Title is required !"),
+  description :z.string().min(1,"Don't you know about your task!!"),
+  dueDate :z.date(),
+  dueTime : z.string().regex(
+    /^([01]\d|2[0-3]):([0-5]\d)(:[0-5]\d)?$/,
+    "Time must be HH:mm or HH:mm:ss"
+  ),
+ });
+
+ const CreateTodoSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+  endAt: z.string().datetime(),
+});
+
+const RegisterSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.email("Invalid email address").toLowerCase().trim(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string().min(6, "Confirm your password"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
 });
 
 
-const CreateTodoSchema = CreateTodoFormSchema.transform((data) => {
-  const parts = data.dueTime.split(":");
-  const h = Number(parts[0]);
-  const m = Number(parts[1]);
-  const s = Number(parts[2]);
-
-  const end = new Date(data.dueDate!);
-  end.setHours(h, m, s, 0);
-  return {
-    title: data.title,
-    description: data.description,
-    status: "todo" as const,
-    completed: false,
-    createdAt: new Date(),
-    endAt: end,
-  };
+const LoginSchema = z.object({
+  email: z.email("Invalid email address").toLowerCase().trim(),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-// User schema:
-const RegisterSchema = z.object(
-  {
-    email: z.string().email(),
-    password: z.string().min(8),
-    role :z.enum(["user","admin"]),
-  }
-)
-
-const LoginSchema = RegisterSchema;
-
-const UserResponseSchema = z.object(
-  {
-    success:z.boolean(),
-    user: z.object({
-      id:z.string().uuid(),
-      email:z.string().email(),
-      password:z.string(),
-      role:z.enum(["user","admin"]),
-      createdAt:z.string().datetime(),
-    })
-  }
-)
 
 
 const ErrorSchema = z.object({
@@ -81,8 +57,6 @@ const ErrorSchema = z.object({
 const MessageSchema = z.object({
   message: z.string(),
 });
-
-
 
 const sessionResponseSchema = z.object({
   authenticated: z.boolean(),
@@ -99,15 +73,13 @@ export {
   TodoStatusEnum,
   TodoSchema,
   CreateTodoFormSchema,
-  CreateTodoSchema,
+  CreateTodoSchema,  
   RegisterSchema,
   LoginSchema,
-  UserResponseSchema,
-  sessionResponseSchema,ErrorSchema,MessageSchema,
+  sessionResponseSchema,
+  ErrorSchema,
+  MessageSchema,
 };
-
-
-
 
 export type TodoStatus = z.infer<typeof TodoStatusEnum>;
 export type Todo = z.infer<typeof TodoSchema>;

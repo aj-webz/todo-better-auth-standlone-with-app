@@ -82,7 +82,7 @@ function SidebarItem({
       onClick={(e) => e.stopPropagation()}
       className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-all duration-300"
     >
-      <span className="flex-shrink-0">{icon}</span>
+      <span className="shrink-0">{icon}</span>
 
       <span
         className={cn(

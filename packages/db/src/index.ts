@@ -2,6 +2,9 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import * as schema from "./schema";
 import { user, session, account } from "./auth-schema";
+import dotenv from "dotenv"
+dotenv.config({path:"../../.env"});
+
 
 let db: ReturnType<typeof drizzle> | null = null;
 
@@ -26,5 +29,4 @@ export function getDb() {
 }
 
 export { todos } from "./schema";
-export { users } from "./schema";
 export { user, account, session };
