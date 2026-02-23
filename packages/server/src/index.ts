@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 import { nanoid } from "nanoid";
 //import bcrypt from "bcryptjs";
 import { getDb, todos } from "@repo/db"
+import {handle} from "hono/vercel"
 import type { Context, Next } from "hono"
 import * as z from "zod";
 import {
@@ -13,20 +14,14 @@ import {
   TodoStatusEnum,
   LoginSchema,
   RegisterSchema,
-  //UserResponseSchema,
-  sessionResponseSchema,ErrorSchema,MessageSchema,
+  ErrorSchema,MessageSchema,
 } from "@repo/shared";
-// import {
-//   deleteCookie,
-//   getCookie,
-//   setCookie,
-// } from 'hono/cookie';
 import { describeRoute, resolver, validator } from "hono-openapi";
 import { openAPIRouteHandler } from "hono-openapi";
 import { Scalar } from "@scalar/hono-api-reference"
 import { auth } from "./auth";
 import { cors } from "hono/cors";
-import { serve } from "@hono/node-server";
+
 
 
 
@@ -549,14 +544,6 @@ app.get("/scalar-docs",Scalar((c)=>({
   layout:"modern",
 })))
 
-// serve({
-//   fetch: app.fetch,
-//   port: 3001,
-//   hostname: "0.0.0.0", 
-// }, (info) => {
-//   console.log(`Server running on http://localhost:${info.port}`)
-// })
 
-
-export { app };
-export default app.fetch.bind(app) ;
+export const config = {runtime:'nodejs'}
+export default handle(app) ;

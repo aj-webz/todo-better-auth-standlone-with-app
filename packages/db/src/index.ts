@@ -2,8 +2,8 @@ import postgres from "postgres";
 import { drizzle } from "drizzle-orm/postgres-js";
 import * as schema from "./schema";
 import { user, session, account } from "./auth-schema";
-import dotenv from "dotenv"
-dotenv.config({path:"../../.env"});
+// import dotenv from "dotenv"
+// dotenv.config({path:"../../.env"});
 
 
 let db: ReturnType<typeof drizzle> | null = null;
@@ -21,7 +21,7 @@ export function getDb() {
     prepare: false,
     ssl: isLocal ? false : "require",
     idle_timeout: 20,
-    connect_timeout: 10,
+    connect_timeout: 30,
   });
 
   db = drizzle(client, { schema });

@@ -5710,7 +5710,7 @@ function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose
         break;
       }
       try {
-        handle(incoming.subarray(0, length + 1));
+        handle2(incoming.subarray(0, length + 1));
       } catch (e) {
         query && (query.cursorFn || query.describeFirst) && write(Sync);
         errored(e);
@@ -5817,7 +5817,7 @@ function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose
     delay = (typeof backoff2 === "function" ? backoff2(options.shared.retries) : backoff2) * 1e3;
     onclose(connection2, Errors.connection("CONNECTION_CLOSED", options, socket));
   }
-  function handle(xs, x = xs[0]) {
+  function handle2(xs, x = xs[0]) {
     (x === 68 ? DataRow : (
       // D
       x === 100 ? CopyData : (
@@ -6403,13 +6403,13 @@ function Subscribe(postgres2, options) {
     }
     function data(x2) {
       if (x2[0] === 119) {
-        parse(x2.subarray(25), state2, sql2.options.parsers, handle, options.transform);
+        parse(x2.subarray(25), state2, sql2.options.parsers, handle2, options.transform);
       } else if (x2[0] === 107 && x2[17]) {
         state2.lsn = x2.subarray(1, 9);
         pong();
       }
     }
-    function handle(a, b2) {
+    function handle2(a, b2) {
       const path = b2.relation.schema + "." + b2.relation.table;
       call("*", a, b2);
       call("*:" + path, a, b2);
@@ -6433,7 +6433,7 @@ function Subscribe(postgres2, options) {
 function Time(x) {
   return new Date(Date.UTC(2e3, 0, 1) + Number(x / BigInt(1e3)));
 }
-function parse(x, state, parsers2, handle, transform) {
+function parse(x, state, parsers2, handle2, transform) {
   const char = (acc, [k, v]) => (acc[k.charCodeAt(0)] = v, acc);
   Object.entries({
     R: (x2) => {
@@ -6472,7 +6472,7 @@ function parse(x, state, parsers2, handle, transform) {
       let i = 1;
       const relation = state[x2.readUInt32BE(i)];
       const { row } = tuples(x2, relation.columns, i += 7, transform);
-      handle(row, {
+      handle2(row, {
         command: "insert",
         relation
       });
@@ -6482,7 +6482,7 @@ function parse(x, state, parsers2, handle, transform) {
       const relation = state[x2.readUInt32BE(i)];
       i += 4;
       const key = x2[i] === 75;
-      handle(
+      handle2(
         key || x2[i] === 79 ? tuples(x2, relation.columns, i += 3, transform).row : null,
         {
           command: "delete",
@@ -6499,7 +6499,7 @@ function parse(x, state, parsers2, handle, transform) {
       const xs = key || x2[i] === 79 ? tuples(x2, relation.columns, i += 3, transform) : null;
       xs && (i = xs.i);
       const { row } = tuples(x2, relation.columns, i + 3, transform);
-      handle(row, {
+      handle2(row, {
         command: "update",
         relation,
         key,
@@ -7114,8 +7114,6 @@ var todos = pgTable2("todoworker", {
 });
 
 // ../db/src/index.ts
-import dotenv from "dotenv";
-dotenv.config({ path: "../../.env" });
 var db = null;
 function getDb() {
   if (db) return db;
@@ -7127,13 +7125,14 @@ function getDb() {
     prepare: false,
     ssl: isLocal ? false : "require",
     idle_timeout: 20,
-    connect_timeout: 10
+    connect_timeout: 30
   });
   db = drizzle(client, { schema: schema_exports });
   return db;
 }
 
 // src/index.ts
+import { handle } from "hono/vercel";
 import * as z3 from "zod";
 
 // ../shared/src/todo.schema.ts
@@ -8598,6 +8597,7 @@ var auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3001",
+    "https://todo-better-auth-standlone-with-app.vercel.app",
     "https://todo-better-auth-standalone-server-sage.vercel.app",
     "https://todo-better-auth-standalone-web.vercel.app",
     "my-expo-app://",
@@ -8621,7 +8621,6 @@ var auth = betterAuth({
 
 // src/index.ts
 import { cors } from "hono/cors";
-import "@hono/node-server";
 var UpdateStatusSchema = z3.object({
   status: TodoStatusEnum
 });
@@ -8861,8 +8860,9 @@ app.get("/scalar-docs", Scalar((c) => ({
   theme: "deepSpace",
   layout: "modern"
 })));
-var index_default = app.fetch.bind(app);
+var config = { runtime: "nodejs" };
+var index_default = handle(app);
 export {
-  app,
+  config,
   index_default as default
 };
