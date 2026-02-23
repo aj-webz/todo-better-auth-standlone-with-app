@@ -12,6 +12,7 @@ export function getDb() {
   if (db) return db;
 
   const DATABASE_URL = process.env.DATABASE_URL;
+  console.log("DATABASE_URL:", DATABASE_URL ? "found" : "MISSING") 
   if (!DATABASE_URL) throw new Error("DATABASE_URL is missing");
 
   const isLocal = DATABASE_URL.includes("localhost") || DATABASE_URL.includes("127.0.0.1");
