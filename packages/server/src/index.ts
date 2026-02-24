@@ -1,6 +1,6 @@
 //import bcrypt from "bcryptjs";
 
-import { serve } from "@hono/node-server";
+// import { serve } from "@hono/node-server";
 import { getDb, todos } from "@repo/db";
 import {
   CreateTodoSchema,
@@ -547,11 +547,11 @@ app.get(
   }))
 );
 
-serve({
-  fetch: app.fetch,
-  port: 3000,
-  hostname: "0.0.0.0",
-});
+// serve({
+//   fetch: app.fetch,
+//   port: 3000,
+//   hostname: "0.0.0.0",
+// });
 
 console.log("http://localhost:3001");
 export const config = { runtime: "nodejs" };
