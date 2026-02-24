@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "version": "1.0.0",
-  "main": "./api/index.js",
+  "main": "./index.js",
   "types": "./src/index.ts",
   "exports": {
     ".": ["./src/index.ts","./api/index.js"]
