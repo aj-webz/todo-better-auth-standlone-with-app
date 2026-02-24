@@ -21,6 +21,7 @@ import { openAPIRouteHandler } from "hono-openapi";
 import { Scalar } from "@scalar/hono-api-reference"
 import { auth } from "./auth";
 import { cors } from "hono/cors";
+import { handle } from "hono/vercel"
 
 
 
@@ -67,7 +68,7 @@ app.all("/auth/*",(c)=>
 
 
 
-//const hour = 60 * 60;
+
 
 
 app.use( async(c,next)=>
@@ -546,5 +547,5 @@ app.get("/scalar-docs",Scalar((c)=>({
 })))
 
 
-// export const config = {runtime:'nodejs'}
-export default app ;
+export const config = {runtime:'nodejs'}
+export default handle(app) ;

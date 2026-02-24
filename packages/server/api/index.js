@@ -6052,11 +6052,11 @@ function Connection(options, queues = {}, { onopen = noop, onend = noop, onclose
       "sha256"
     );
     const clientKey = await hmac(saltedPassword, "Client Key");
-    const auth3 = "n=*,r=" + nonce + ",r=" + res.r + ",s=" + res.s + ",i=" + res.i + ",c=biws,r=" + res.r;
-    serverSignature = (await hmac(await hmac(saltedPassword, "Server Key"), auth3)).toString("base64");
+    const auth2 = "n=*,r=" + nonce + ",r=" + res.r + ",s=" + res.s + ",i=" + res.i + ",c=biws,r=" + res.r;
+    serverSignature = (await hmac(await hmac(saltedPassword, "Server Key"), auth2)).toString("base64");
     const payload = "c=biws,r=" + res.r + ",p=" + xor(
       clientKey,
-      Buffer.from(await hmac(await sha256(clientKey), auth3))
+      Buffer.from(await hmac(await sha256(clientKey), auth2))
     ).toString("base64");
     write(
       bytes_default().p().str(payload).end()
@@ -7133,7 +7133,6 @@ function getDb() {
 }
 
 // src/index.ts
-import { handle } from "hono/vercel";
 import * as z3 from "zod";
 
 // ../shared/src/todo.schema.ts
@@ -8622,6 +8621,7 @@ var auth = betterAuth({
 
 // src/index.ts
 import { cors } from "hono/cors";
+import { handle } from "hono/vercel";
 var UpdateStatusSchema = z3.object({
   status: TodoStatusEnum
 });
@@ -8645,6 +8645,21 @@ app.use(
   })
 );
 app.get("/health", (c) => c.json({ status: "ok" }));
+app.all("/auth/*", (c) => {
+  return auth.handler(c.req.raw);
+});
+app.use(async (c, next) => {
+  const session2 = await auth.api.getSession({ headers: c.req.raw.headers });
+  console.log("Session:", JSON.stringify(session2));
+  if (!session2) {
+    c.set("user", null);
+    c.set("session", null);
+    await next();
+    return;
+  }
+  c.set("user", session2.user);
+  await next();
+});
 var authGuard = async (c, next) => {
   const user2 = c.get("user");
   console.log("user in server:", user2);
