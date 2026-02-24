@@ -7,14 +7,12 @@ export default defineConfig({
   // target: "es2024", 
   bundle: true,
   splitting: false,
-  clean: true,
+  clean: false,
   platform: "node",
-  //minify: true,
-  
+  minify: false,
   //shims: true, 
   //banner: {
     //js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url);`,},
- 
     external: ["events", "fs", "path", "os", "crypto", "async_hooks", "http", "https", "stream", "url", "util"],
     noExternal: ["@repo/shared", "@repo/db"],
 });
