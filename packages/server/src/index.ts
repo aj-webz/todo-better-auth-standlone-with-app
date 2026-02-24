@@ -549,7 +549,7 @@ app.get(
 
 serve({
   fetch: app.fetch,
-  port: 3001,
+  port: 3000,
   hostname: "0.0.0.0",
 });
 

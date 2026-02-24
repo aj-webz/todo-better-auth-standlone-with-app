@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "pnpm exec tsx watch --require dotenv/config src/index.ts",
     "build": "tsc --noEmit && tsup",
-    "start": "node ./api/index.js",
+    "start": "node ./index.js",
     "build:spec": "pnpm exec tsx scripts/gen-spec.ts"
   },
   "dependencies": {

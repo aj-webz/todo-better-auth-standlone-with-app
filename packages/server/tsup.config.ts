@@ -11,8 +11,6 @@ export default defineConfig({
   platform: "node",
   minify: false,
   //shims: true,
-  //banner: {
-  //js: `import { createRequire } from 'module'; const require = createRequire(import.meta.url);`,},
   external: [
     "events",
     "fs",
