@@ -7,18 +7,23 @@
     "dev": "turbo dev",
     "start": "turbo run start",
     "db:migrate": "turbo run db:migrate",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "fix": "ultracite fix",
+    "format": "biome format --write .",
+    "lint": "biome lint --write .",
+    "check-b": "biome check --write",
+    "check": "ultracite check",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@workspace/eslint-config": "workspace:*",
+    "@biomejs/biome": "2.4.0",
     "@workspace/typescript-config": "workspace:*",
     "dotenv": "^17.2.4",
+    "husky": "^9.1.7",
     "openapi-typescript": "^7.13.0",
     "prettier": "^3.8.1",
     "turbo": "^2.8.1",
-
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "ultracite": "7.2.3"
   },
   "packageManager": "pnpm@10.4.1",
   "engines": {
@@ -30,8 +35,8 @@
     "@hono/swagger-ui": "^0.5.3",
     "@hookform/resolvers": "^5.2.2",
     "@pulumi/awsx": "^3.1.0",
-    "@repo/db": "workspace:*",
     "@repo/api": "workspace:*",
+    "@repo/db": "workspace:*",
     "@scalar/hono-api-reference": "^0.9.41",
     "@tanstack/react-query": "^5.90.20",
     "bcrypt": "^6.0.0",
@@ -41,17 +46,18 @@
     "date-fns-tz": "^3.2.0",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
+    "eas-cli": "^18.0.4",
     "hono": "^4.11.7",
     "hono-openapi": "^1.2.0",
     "nanoid": "^5.1.1",
     "openapi-fetch": "^0.17.0",
     "openapi-react-query": "^0.5.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-hook-form": "^7.71.1",
     "sonner": "^2.0.7",
     "zod": "^4.3.6",
-    "zod-openapi": "4",
-    "react":"19.1.0",
-    "react-dom":"19.1.0"
+    "zod-openapi": "4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RegisterSchema } from "@repo/shared";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
-import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
 import { authClient } from "@/lib/auth-client";
-import { RegisterSchema } from "@repo/shared";
 
 type RegisterFormInput = z.infer<typeof RegisterSchema>;
 
@@ -69,9 +69,9 @@ export default function RegisterPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-muted/40 to-muted px-6">
-      <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 backdrop-blur-xl shadow-2xl">
+      <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 shadow-2xl backdrop-blur-xl">
         <CardHeader className="space-y-5 px-12 pt-14 pb-6 text-center">
-          <CardTitle className="text-4xl font-extrabold tracking-tight">
+          <CardTitle className="font-extrabold text-4xl tracking-tight">
             Create Account
           </CardTitle>
           <CardDescription className="text-base text-muted-foreground">
@@ -80,50 +80,50 @@ export default function RegisterPage() {
         </CardHeader>
 
         <CardContent className="px-12 pb-14">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-3">
-              <Label className="text-sm font-semibold">Name</Label>
+              <Label className="font-semibold text-sm">Name</Label>
               <Input
-                type="text"
-                placeholder="Enter your name"
                 className="h-12 rounded-xl text-base"
+                placeholder="Enter your name"
+                type="text"
                 {...register("name")}
               />
               {errors.name && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.name.message}
                 </p>
               )}
             </div>
 
             <div className="space-y-3">
-              <Label className="text-sm font-semibold">Email</Label>
+              <Label className="font-semibold text-sm">Email</Label>
               <Input
-                type="email"
-                placeholder="Enter your email"
                 className="h-12 rounded-xl text-base"
+                placeholder="Enter your email"
+                type="email"
                 {...register("email")}
               />
               {errors.email && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.email.message}
                 </p>
               )}
             </div>
 
             <div className="space-y-3">
-              <Label className="text-sm font-semibold">Password</Label>
+              <Label className="font-semibold text-sm">Password</Label>
               <div className="relative">
                 <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
                   className="h-12 rounded-xl pr-12 text-base"
+                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
                   {...register("password")}
                 />
                 <button
-                  type="button"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-muted-foreground transition hover:text-foreground"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                  type="button"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -133,25 +133,25 @@ export default function RegisterPage() {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.password.message}
                 </p>
               )}
             </div>
 
             <div className="space-y-3">
-              <Label className="text-sm font-semibold">Confirm Password</Label>
+              <Label className="font-semibold text-sm">Confirm Password</Label>
               <div className="relative">
                 <Input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm your password"
                   className="h-12 rounded-xl pr-12 text-base"
+                  placeholder="Confirm your password"
+                  type={showConfirmPassword ? "text" : "password"}
                   {...register("confirmPassword")}
                 />
                 <button
-                  type="button"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 text-muted-foreground transition hover:text-foreground"
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                  type="button"
                 >
                   {showConfirmPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -161,32 +161,31 @@ export default function RegisterPage() {
                 </button>
               </div>
               {errors.confirmPassword && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.confirmPassword.message}
                 </p>
               )}
             </div>
 
             <Button
-              type="submit"
-              className="h-12 w-full rounded-xl text-base font-semibold shadow-lg transition-all hover:scale-[1.02]"
+              className="h-12 w-full rounded-xl font-semibold text-base shadow-lg transition-all hover:scale-[1.02]"
               disabled={isSubmitting || isPending}
+              type="submit"
             >
               {isPending ? "Creating account..." : "Create Account"}
             </Button>
           </form>
 
-          <div className="flex justify-between items-center mt-12 text-center">
-            <p className="text-sm text-muted-foreground">
+          <div className="mt-12 flex items-center justify-between text-center">
+            <p className="text-muted-foreground text-sm">
               Already have an account?{" "}
             </p>
-              <Link
-                href="/login"
-                className="font-semibold text-primary hover:underline"
-              >
-                Login here
-              </Link>
-          
+            <Link
+              className="font-semibold text-primary hover:underline"
+              href="/login"
+            >
+              Login here
+            </Link>
           </div>
         </CardContent>
       </Card>

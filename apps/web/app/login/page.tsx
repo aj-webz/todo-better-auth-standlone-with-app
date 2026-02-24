@@ -1,25 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginSchema } from "@repo/shared";
 import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
-import Link from "next/link";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import type { z } from "zod";
 import { authClient } from "@/lib/auth-client";
-import { LoginSchema } from "@repo/shared";
 
 type LoginFormValues = z.infer<typeof LoginSchema>;
 
@@ -54,7 +54,7 @@ export default function LoginPage() {
         toast.error(error.message);
       } else {
         toast.error(
-          "Check the credentials properly , password and email could be invalid",
+          "Check the credentials properly , password and email could be invalid"
         );
       }
     }
@@ -62,9 +62,9 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-background via-muted/40 to-muted px-8">
-      <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 backdrop-blur-xl shadow-2xl">
+      <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 shadow-2xl backdrop-blur-xl">
         <CardHeader className="space-y-6 px-16 pt-16 pb-8 text-center">
-          <CardTitle className="text-5xl font-extrabold tracking-tight">
+          <CardTitle className="font-extrabold text-5xl tracking-tight">
             Welcome Back
           </CardTitle>
           <CardDescription className="text-lg text-muted-foreground">
@@ -73,18 +73,17 @@ export default function LoginPage() {
         </CardHeader>
 
         <CardContent className="px-16 pb-16">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
-        
+          <form className="space-y-10" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-4">
-              <Label className="text-base font-semibold">Email</Label>
+              <Label className="font-semibold text-base">Email</Label>
               <Input
-                type="email"
-                placeholder="Enter your email"
                 className="h-14 rounded-xl text-base"
+                placeholder="Enter your email"
+                type="email"
                 {...register("email")}
               />
               {errors.email && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.email.message}
                 </p>
               )}
@@ -92,18 +91,18 @@ export default function LoginPage() {
 
             {/* Password */}
             <div className="space-y-4">
-              <Label className="text-base font-semibold">Password</Label>
+              <Label className="font-semibold text-base">Password</Label>
               <div className="relative">
                 <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
                   className="h-14 rounded-xl pr-14 text-base"
+                  placeholder="Enter your password"
+                  type={showPassword ? "text" : "password"}
                   {...register("password")}
                 />
                 <button
-                  type="button"
+                  className="absolute top-1/2 right-5 -translate-y-1/2 text-muted-foreground transition hover:text-foreground"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+                  type="button"
                 >
                   {showPassword ? (
                     <EyeOff className="h-6 w-6" />
@@ -113,7 +112,7 @@ export default function LoginPage() {
                 </button>
               </div>
               {errors.password && (
-                <p className="text-sm font-medium text-red-500">
+                <p className="font-medium text-red-500 text-sm">
                   {errors.password.message}
                 </p>
               )}
@@ -121,22 +120,22 @@ export default function LoginPage() {
 
             {/* Submit */}
             <Button
-              type="submit"
-              className="h-14 w-full rounded-xl text-lg font-semibold shadow-lg transition-all hover:scale-[1.02]"
+              className="h-14 w-full rounded-xl font-semibold text-lg shadow-lg transition-all hover:scale-[1.02]"
               disabled={isSubmitting}
+              type="submit"
             >
               {isSubmitting ? "Logging in..." : "Login"}
             </Button>
           </form>
 
           {/* Register Link */}
-          <div className="flex justify-between items-center mt-12 text-center">
+          <div className="mt-12 flex items-center justify-between text-center">
             <p className="text-base text-muted-foreground">
               Don’t have an account?
             </p>
             <Link
-              href="/register"
               className="font-semibold text-primary hover:underline"
+              href="/register"
             >
               Register here
             </Link>

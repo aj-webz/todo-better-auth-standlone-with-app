@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View } from "react-native";
 
 interface ContainerProps {
   children: React.ReactNode;

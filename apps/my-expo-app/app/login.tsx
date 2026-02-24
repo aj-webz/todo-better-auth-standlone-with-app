@@ -1,10 +1,19 @@
-import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, ScrollView, Platform } from "react-native";
-import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "expo-router";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { z } from "zod/v4";
 import { authClient } from "@/lib/authClient";
-import { Link, router } from "expo-router";
 
 const loginSchema = z.object({
   email: z.email("Invalid email address"),
@@ -29,82 +38,102 @@ export default function LoginScreen() {
   });
 
   const onSubmit = async (values: LoginForm) => {
-    const result = await authClient.signIn.email({
-      email: values.email,
-      password: values.password,
-    });
+    try {
+      const result = await authClient.signIn.email({
+        email: values.email,
+        password: values.password,
+      });
 
-    console.log("LOGIN RESULT:", result);
+      console.log("LOGIN RESULT:", result);
 
-    if (result.error) {
-      Alert.alert("Login Failed", result.error.message);
-      return;
+      if (result?.error) {
+        Alert.alert("Login Failed", result.error.message);
+        return;
+      }
+
+      console.log("LOGIN SUCCESS:", result?.data);
+    } catch (err) {
+      console.error("LOGIN EXCEPTION:", err);
+
+      const message =
+        err instanceof Error ? err.message : "Something went wrong";
+
+      Alert.alert("Login Failed", message);
     }
-    console.log("LOGIN SUCCESS:", result.data);
   };
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-white"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      className="flex-1 bg-white"
     >
       <ScrollView
+        className="px-6"
         contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         keyboardShouldPersistTaps="handled"
-        className="px-6"
       >
-        <Text className="text-3xl font-bold text-center text-black mb-2">
+        <Text className="mb-2 text-center font-bold text-3xl text-black">
           Welcome Back
         </Text>
-        <Text className="text-sm text-center text-gray-500 mb-8">
+        <Text className="mb-8 text-center text-gray-500 text-sm">
           Sign in to your account
         </Text>
 
         <View className="mb-4">
-          <Text className="text-sm font-semibold text-gray-700 mb-1">Email</Text>
+          <Text className="mb-1 font-semibold text-gray-700 text-sm">
+            Email
+          </Text>
           <Controller
             control={control}
             name="email"
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                className={`border rounded-xl px-4 py-3 text-sm text-black ${
+                autoCapitalize="none"
+                className={`rounded-xl border px-4 py-3 text-black text-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder="Enter email"
-                placeholderTextColor="#9ca3af"
+                keyboardType="email-address"
                 onBlur={onBlur}
                 onChangeText={onChange}
+                placeholder="Enter email"
+                placeholderTextColor="#9ca3af"
                 value={value}
-                autoCapitalize="none"
-                keyboardType="email-address"
               />
             )}
           />
           {errors.email && (
-            <Text className="text-red-500 text-xs mt-1">{errors.email.message}</Text>
+            <Text className="mt-1 text-red-500 text-xs">
+              {errors.email.message}
+            </Text>
           )}
         </View>
 
         <View className="mb-6">
-          <Text className="text-sm font-semibold text-gray-700 mb-1">Password</Text>
+          <Text className="mb-1 font-semibold text-gray-700 text-sm">
+            Password
+          </Text>
           <Controller
             control={control}
             name="password"
             render={({ field: { onChange, onBlur, value } }) => (
-              <View className={`flex-row items-center border rounded-xl px-4 ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              }`}>
+              <View
+                className={`flex-row items-center rounded-xl border px-4 ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
+              >
                 <TextInput
-                  className="flex-1 py-3 text-sm text-black"
-                  placeholder="Enter password"
-                  placeholderTextColor="#9ca3af"
+                  className="flex-1 py-3 text-black text-sm"
                   onBlur={onBlur}
                   onChangeText={onChange}
-                  value={value}
+                  placeholder="Enter password"
+                  placeholderTextColor="#9ca3af"
                   secureTextEntry={!showPassword}
+                  value={value}
                 />
-                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                  <Text className="text-xs text-gray-500 font-semibold">
+                <TouchableOpacity
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Text className="font-semibold text-gray-500 text-xs">
                     {showPassword ? "HIDE" : "SHOW"}
                   </Text>
                 </TouchableOpacity>
@@ -112,27 +141,29 @@ export default function LoginScreen() {
             )}
           />
           {errors.password && (
-            <Text className="text-red-500 text-xs mt-1">{errors.password.message}</Text>
+            <Text className="mt-1 text-red-500 text-xs">
+              {errors.password.message}
+            </Text>
           )}
         </View>
 
         <TouchableOpacity
-          className={`py-4 rounded-xl items-center ${
+          className={`items-center rounded-xl py-4 ${
             isSubmitting ? "bg-gray-400" : "bg-black"
           }`}
-          onPress={handleSubmit(onSubmit)}
           disabled={isSubmitting}
+          onPress={handleSubmit(onSubmit)}
         >
-          <Text className="text-white font-semibold text-base">
+          <Text className="font-semibold text-base text-white">
             {isSubmitting ? "Signing in..." : "Sign In"}
           </Text>
         </TouchableOpacity>
 
-        <Link href={"/register"} asChild>
+        <Link asChild href={"/register"}>
           <TouchableOpacity className="mt-6 items-center">
-            <Text className="text-sm text-gray-500">
+            <Text className="text-gray-500 text-sm">
               Don't have an account?{" "}
-              <Text className="text-black font-semibold">Sign Up</Text>
+              <Text className="font-semibold text-black">Sign Up</Text>
             </Text>
           </TouchableOpacity>
         </Link>

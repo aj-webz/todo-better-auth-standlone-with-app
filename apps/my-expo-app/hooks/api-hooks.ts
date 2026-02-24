@@ -1,11 +1,11 @@
-
 import { useQueryClient } from "@tanstack/react-query";
 import { $api } from "@/lib/api-client";
+
 const todosQueryKey = $api.queryOptions("get", "/api/todos").queryKey;
 
 export function useTodoQuery() {
   return $api.useQuery("get", "/api/todos", undefined, {
-    staleTime: 1000 * 60,        
+    staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
 }

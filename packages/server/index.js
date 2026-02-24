@@ -1,8 +1,5 @@
 var __defProp = Object.defineProperty;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __typeError = (msg) => {
-  throw TypeError(msg);
-};
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -10,10 +7,6 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __accessCheck = (obj, member, msg) => member.has(obj) || __typeError("Cannot " + msg);
-var __privateGet = (obj, member, getter) => (__accessCheck(obj, member, "read from private field"), getter ? getter.call(obj) : member.get(obj));
-var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot add the same private member more than once") : member instanceof WeakSet ? member.add(obj) : member.set(obj, value);
-var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 
 // ../../node_modules/quansync/dist/index.mjs
 function isThenable(value) {
@@ -4874,11 +4867,11 @@ var init_index_DZEfthgZ = __esm({
 });
 
 // src/index.ts
-import { Hono } from "hono";
-import { eq, and } from "drizzle-orm";
-import "hono/jwt";
-import { logger } from "hono/logger";
-import { nanoid } from "nanoid";
+import { serve } from "@hono/node-server";
+
+// ../db/src/index.ts
+import dotenv from "dotenv";
+import { drizzle } from "drizzle-orm/postgres-js";
 
 // ../../node_modules/postgres/src/index.js
 import os from "os";
@@ -7002,26 +6995,9 @@ function osUsername() {
   }
 }
 
-// ../db/src/index.ts
-import { drizzle } from "drizzle-orm/postgres-js";
-
-// ../db/src/schema.ts
-var schema_exports = {};
-__export(schema_exports, {
-  todoStatusEnum: () => todoStatusEnum,
-  todos: () => todos
-});
-import {
-  pgTable as pgTable2,
-  text as text2,
-  boolean as boolean2,
-  timestamp as timestamp2,
-  pgEnum
-} from "drizzle-orm/pg-core";
-
 // ../db/src/auth-schema.ts
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { boolean, index, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 var user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -7094,6 +7070,12 @@ var accountRelations = relations(account, ({ one }) => ({
 }));
 
 // ../db/src/schema.ts
+var schema_exports = {};
+__export(schema_exports, {
+  todoStatusEnum: () => todoStatusEnum,
+  todos: () => todos
+});
+import { boolean as boolean2, pgEnum, pgTable as pgTable2, text as text2, timestamp as timestamp2 } from "drizzle-orm/pg-core";
 var todoStatusEnum = pgEnum("todo_status", [
   "todo",
   "in-progress",
@@ -7114,12 +7096,17 @@ var todos = pgTable2("todoworker", {
 });
 
 // ../db/src/index.ts
+dotenv.config({ path: "../../.env" });
 var db = null;
 function getDb() {
-  if (db) return db;
+  if (db) {
+    return db;
+  }
   const DATABASE_URL = process.env.DATABASE_URL;
   console.log("DATABASE_URL:", DATABASE_URL ? "found" : "MISSING");
-  if (!DATABASE_URL) throw new Error("DATABASE_URL is missing");
+  if (!DATABASE_URL) {
+    throw new Error("DATABASE_URL is missing");
+  }
   const isLocal = DATABASE_URL.includes("localhost") || DATABASE_URL.includes("127.0.0.1");
   const client = src_default(DATABASE_URL, {
     max: 1,
@@ -7131,9 +7118,6 @@ function getDb() {
   db = drizzle(client, { schema: schema_exports });
   return db;
 }
-
-// src/index.ts
-import * as z3 from "zod";
 
 // ../shared/src/todo.schema.ts
 import { z } from "zod";
@@ -7196,6 +7180,176 @@ var sessionResponseSchema = z.object({
     exp: z.number()
   })
 });
+
+// ../../node_modules/@scalar/core/dist/libs/html-rendering/html-rendering.js
+var addIndent = (str, spaces = 2, initialIndent = false) => {
+  const indent = " ".repeat(spaces);
+  const lines = str.split("\n");
+  return lines.map((line, index2) => {
+    if (index2 === 0 && !initialIndent) {
+      return line;
+    }
+    return `${indent}${line}`;
+  }).join("\n");
+};
+var getStyles = (configuration, customTheme2) => {
+  const styles = [];
+  if (configuration.customCss) {
+    styles.push("/* Custom CSS */");
+    styles.push(configuration.customCss);
+  }
+  if (!configuration.theme && customTheme2) {
+    styles.push("/* Custom Theme */");
+    styles.push(customTheme2);
+  }
+  if (styles.length === 0) {
+    return "";
+  }
+  return `
+    <style type="text/css">
+      ${addIndent(styles.join("\n\n"), 6)}
+    </style>`;
+};
+var getHtmlDocument = (givenConfiguration, customTheme2 = "") => {
+  const { cdn, pageTitle, customCss, theme, ...rest } = givenConfiguration;
+  const configuration = getConfiguration({
+    ...rest,
+    ...theme ? { theme } : {},
+    customCss
+  });
+  const content = `<!doctype html>
+<html>
+  <head>
+    <title>${pageTitle ?? "Scalar API Reference"}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1" />${getStyles(configuration, customTheme2)}
+  </head>
+  <body>
+    <div id="app"></div>${getScriptTags(configuration, cdn)}
+  </body>
+</html>`;
+  return content;
+};
+var serializeArrayWithFunctions = (arr) => {
+  return `[${arr.map((item) => typeof item === "function" ? item.toString() : JSON.stringify(item)).join(", ")}]`;
+};
+function getScriptTags(configuration, cdn) {
+  const restConfig = { ...configuration };
+  const functionProps = [];
+  for (const [key, value] of Object.entries(configuration)) {
+    if (typeof value === "function") {
+      functionProps.push(`"${key}": ${value.toString()}`);
+      delete restConfig[key];
+    } else if (Array.isArray(value) && value.some((item) => typeof item === "function")) {
+      functionProps.push(`"${key}": ${serializeArrayWithFunctions(value)}`);
+      delete restConfig[key];
+    }
+  }
+  const configString = JSON.stringify(restConfig, null, 2).split("\n").map((line, index2) => index2 === 0 ? line : "      " + line).join("\n").replace(/\s*}$/, "");
+  const functionPropsString = functionProps.length ? `,
+        ${functionProps.join(",\n        ")}
+      }` : "}";
+  return `
+    <!-- Load the Script -->
+    <script src="${cdn ?? "https://cdn.jsdelivr.net/npm/@scalar/api-reference"}"></script>
+
+    <!-- Initialize the Scalar API Reference -->
+    <script type="text/javascript">
+      Scalar.createApiReference('#app', ${configString}${functionPropsString})
+    </script>`;
+}
+var getConfiguration = (givenConfiguration) => {
+  const configuration = {
+    ...givenConfiguration
+  };
+  if (typeof configuration.content === "function") {
+    configuration.content = configuration.content();
+  }
+  if (configuration.content && configuration.url) {
+    delete configuration.content;
+  }
+  return configuration;
+};
+
+// ../../node_modules/@scalar/hono-api-reference/dist/scalar.js
+var DEFAULT_CONFIGURATION = {
+  _integration: "hono"
+};
+var customTheme = `
+.dark-mode {
+  color-scheme: dark;
+  --scalar-color-1: rgba(255, 255, 245, .86);
+  --scalar-color-2: rgba(255, 255, 245, .6);
+  --scalar-color-3: rgba(255, 255, 245, .38);
+  --scalar-color-disabled: rgba(255, 255, 245, .25);
+  --scalar-color-ghost: rgba(255, 255, 245, .25);
+  --scalar-color-accent: #e36002;
+  --scalar-background-1: #1e1e20;
+  --scalar-background-2: #2a2a2a;
+  --scalar-background-3: #505053;
+  --scalar-background-4: rgba(255, 255, 255, 0.06);
+  --scalar-background-accent: #e360021f;
+
+  --scalar-border-color: rgba(255, 255, 255, 0.1);
+  --scalar-scrollbar-color: rgba(255, 255, 255, 0.24);
+  --scalar-scrollbar-color-active: rgba(255, 255, 255, 0.48);
+  --scalar-lifted-brightness: 1.45;
+  --scalar-backdrop-brightness: 0.5;
+
+  --scalar-shadow-1: 0 1px 3px 0 rgb(0, 0, 0, 0.1);
+  --scalar-shadow-2: rgba(15, 15, 15, 0.2) 0px 3px 6px,
+    rgba(15, 15, 15, 0.4) 0px 9px 24px, 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+  --scalar-button-1: #f6f6f6;
+  --scalar-button-1-color: #000;
+  --scalar-button-1-hover: #e7e7e7;
+
+  --scalar-color-green: #3dd68c;
+  --scalar-color-red: #f66f81;
+  --scalar-color-yellow: #f9b44e;
+  --scalar-color-blue: #5c73e7;
+  --scalar-color-orange: #ff8d4d;
+  --scalar-color-purple: #b191f9;
+}
+/* Sidebar */
+.dark-mode .sidebar {
+  --scalar-sidebar-background-1: #161618;
+  --scalar-sidebar-item-hover-color: var(--scalar-color-accent);
+  --scalar-sidebar-item-hover-background: transparent;
+  --scalar-sidebar-item-active-background: transparent;
+  --scalar-sidebar-border-color: transparent;
+  --scalar-sidebar-color-1: var(--scalar-color-1);
+  --scalar-sidebar-color-2: var(--scalar-color-2);
+  --scalar-sidebar-color-active: var(--scalar-color-accent);
+  --scalar-sidebar-search-background: #252529;
+  --scalar-sidebar-search-border-color: transparent;
+  --scalar-sidebar-search-color: var(--scalar-color-3);
+}
+`;
+var Scalar = (configOrResolver) => {
+  return async (c) => {
+    let resolvedConfig = {};
+    if (typeof configOrResolver === "function") {
+      resolvedConfig = await configOrResolver(c);
+    } else {
+      resolvedConfig = configOrResolver;
+    }
+    const configuration = {
+      ...DEFAULT_CONFIGURATION,
+      ...resolvedConfig
+    };
+    return c.html(getHtmlDocument(configuration, customTheme));
+  };
+};
+
+// src/index.ts
+import { and, eq } from "drizzle-orm";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
+import { handle } from "hono/vercel";
 
 // ../../node_modules/hono-openapi/dist/index.js
 import { findTargetHandler } from "hono/utils/handler";
@@ -7731,172 +7885,9 @@ function describeRoute(spec) {
   });
 }
 
-// ../../node_modules/@scalar/core/dist/libs/html-rendering/html-rendering.js
-var addIndent = (str, spaces = 2, initialIndent = false) => {
-  const indent = " ".repeat(spaces);
-  const lines = str.split("\n");
-  return lines.map((line, index2) => {
-    if (index2 === 0 && !initialIndent) {
-      return line;
-    }
-    return `${indent}${line}`;
-  }).join("\n");
-};
-var getStyles = (configuration, customTheme2) => {
-  const styles = [];
-  if (configuration.customCss) {
-    styles.push("/* Custom CSS */");
-    styles.push(configuration.customCss);
-  }
-  if (!configuration.theme && customTheme2) {
-    styles.push("/* Custom Theme */");
-    styles.push(customTheme2);
-  }
-  if (styles.length === 0) {
-    return "";
-  }
-  return `
-    <style type="text/css">
-      ${addIndent(styles.join("\n\n"), 6)}
-    </style>`;
-};
-var getHtmlDocument = (givenConfiguration, customTheme2 = "") => {
-  const { cdn, pageTitle, customCss, theme, ...rest } = givenConfiguration;
-  const configuration = getConfiguration({
-    ...rest,
-    ...theme ? { theme } : {},
-    customCss
-  });
-  const content = `<!doctype html>
-<html>
-  <head>
-    <title>${pageTitle ?? "Scalar API Reference"}</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1" />${getStyles(configuration, customTheme2)}
-  </head>
-  <body>
-    <div id="app"></div>${getScriptTags(configuration, cdn)}
-  </body>
-</html>`;
-  return content;
-};
-var serializeArrayWithFunctions = (arr) => {
-  return `[${arr.map((item) => typeof item === "function" ? item.toString() : JSON.stringify(item)).join(", ")}]`;
-};
-function getScriptTags(configuration, cdn) {
-  const restConfig = { ...configuration };
-  const functionProps = [];
-  for (const [key, value] of Object.entries(configuration)) {
-    if (typeof value === "function") {
-      functionProps.push(`"${key}": ${value.toString()}`);
-      delete restConfig[key];
-    } else if (Array.isArray(value) && value.some((item) => typeof item === "function")) {
-      functionProps.push(`"${key}": ${serializeArrayWithFunctions(value)}`);
-      delete restConfig[key];
-    }
-  }
-  const configString = JSON.stringify(restConfig, null, 2).split("\n").map((line, index2) => index2 === 0 ? line : "      " + line).join("\n").replace(/\s*}$/, "");
-  const functionPropsString = functionProps.length ? `,
-        ${functionProps.join(",\n        ")}
-      }` : "}";
-  return `
-    <!-- Load the Script -->
-    <script src="${cdn ?? "https://cdn.jsdelivr.net/npm/@scalar/api-reference"}"></script>
-
-    <!-- Initialize the Scalar API Reference -->
-    <script type="text/javascript">
-      Scalar.createApiReference('#app', ${configString}${functionPropsString})
-    </script>`;
-}
-var getConfiguration = (givenConfiguration) => {
-  const configuration = {
-    ...givenConfiguration
-  };
-  if (typeof configuration.content === "function") {
-    configuration.content = configuration.content();
-  }
-  if (configuration.content && configuration.url) {
-    delete configuration.content;
-  }
-  return configuration;
-};
-
-// ../../node_modules/@scalar/hono-api-reference/dist/scalar.js
-var DEFAULT_CONFIGURATION = {
-  _integration: "hono"
-};
-var customTheme = `
-.dark-mode {
-  color-scheme: dark;
-  --scalar-color-1: rgba(255, 255, 245, .86);
-  --scalar-color-2: rgba(255, 255, 245, .6);
-  --scalar-color-3: rgba(255, 255, 245, .38);
-  --scalar-color-disabled: rgba(255, 255, 245, .25);
-  --scalar-color-ghost: rgba(255, 255, 245, .25);
-  --scalar-color-accent: #e36002;
-  --scalar-background-1: #1e1e20;
-  --scalar-background-2: #2a2a2a;
-  --scalar-background-3: #505053;
-  --scalar-background-4: rgba(255, 255, 255, 0.06);
-  --scalar-background-accent: #e360021f;
-
-  --scalar-border-color: rgba(255, 255, 255, 0.1);
-  --scalar-scrollbar-color: rgba(255, 255, 255, 0.24);
-  --scalar-scrollbar-color-active: rgba(255, 255, 255, 0.48);
-  --scalar-lifted-brightness: 1.45;
-  --scalar-backdrop-brightness: 0.5;
-
-  --scalar-shadow-1: 0 1px 3px 0 rgb(0, 0, 0, 0.1);
-  --scalar-shadow-2: rgba(15, 15, 15, 0.2) 0px 3px 6px,
-    rgba(15, 15, 15, 0.4) 0px 9px 24px, 0 0 0 1px rgba(255, 255, 255, 0.1);
-
-  --scalar-button-1: #f6f6f6;
-  --scalar-button-1-color: #000;
-  --scalar-button-1-hover: #e7e7e7;
-
-  --scalar-color-green: #3dd68c;
-  --scalar-color-red: #f66f81;
-  --scalar-color-yellow: #f9b44e;
-  --scalar-color-blue: #5c73e7;
-  --scalar-color-orange: #ff8d4d;
-  --scalar-color-purple: #b191f9;
-}
-/* Sidebar */
-.dark-mode .sidebar {
-  --scalar-sidebar-background-1: #161618;
-  --scalar-sidebar-item-hover-color: var(--scalar-color-accent);
-  --scalar-sidebar-item-hover-background: transparent;
-  --scalar-sidebar-item-active-background: transparent;
-  --scalar-sidebar-border-color: transparent;
-  --scalar-sidebar-color-1: var(--scalar-color-1);
-  --scalar-sidebar-color-2: var(--scalar-color-2);
-  --scalar-sidebar-color-active: var(--scalar-color-accent);
-  --scalar-sidebar-search-background: #252529;
-  --scalar-sidebar-search-border-color: transparent;
-  --scalar-sidebar-search-color: var(--scalar-color-3);
-}
-`;
-var Scalar = (configOrResolver) => {
-  return async (c) => {
-    let resolvedConfig = {};
-    if (typeof configOrResolver === "function") {
-      resolvedConfig = await configOrResolver(c);
-    } else {
-      resolvedConfig = configOrResolver;
-    }
-    const configuration = {
-      ...DEFAULT_CONFIGURATION,
-      ...resolvedConfig
-    };
-    return c.html(getHtmlDocument(configuration, customTheme));
-  };
-};
-
-// src/auth.ts
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+// src/index.ts
+import { nanoid } from "nanoid";
+import * as z3 from "zod";
 
 // ../../node_modules/@better-auth/core/dist/async_hooks/index.mjs
 var AsyncLocalStoragePromise = import(
@@ -7925,28 +7916,22 @@ function hideInternalStackFrames(stack) {
   return lines.join("\n    at ");
 }
 function makeErrorForHideStackFrame(Base, clazz) {
-  var _hiddenStack;
   class HideStackFramesError extends Base {
-    constructor(...args2) {
-      var __super = (...args) => {
-        super(...args);
-        __privateAdd(this, _hiddenStack);
-        return this;
-      };
+    #hiddenStack;
+    constructor(...args) {
       if (isErrorStackTraceLimitWritable()) {
         const limit = Error.stackTraceLimit;
         Error.stackTraceLimit = 0;
-        __super(...args2);
+        super(...args);
         Error.stackTraceLimit = limit;
-      } else __super(...args2);
+      } else super(...args);
       const stack = (/* @__PURE__ */ new Error()).stack;
-      if (stack) __privateSet(this, _hiddenStack, hideInternalStackFrames(stack.replace(/^Error/, this.name)));
+      if (stack) this.#hiddenStack = hideInternalStackFrames(stack.replace(/^Error/, this.name));
     }
     get errorStack() {
-      return __privateGet(this, _hiddenStack);
+      return this.#hiddenStack;
     }
   }
-  _hiddenStack = new WeakMap();
   Object.defineProperty(HideStackFramesError.prototype, "constructor", {
     get() {
       return clazz;
@@ -8553,9 +8538,9 @@ var expo = (options) => {
       if (options?.disableOriginOverride || request.headers.get("origin")) return;
       const expoOrigin = request.headers.get("expo-origin");
       if (!expoOrigin) return;
-      const req = request.clone();
-      req.headers.set("origin", expoOrigin);
-      return { request: req };
+      const newHeaders = new Headers(request.headers);
+      newHeaders.set("origin", expoOrigin);
+      return { request: new Request(request, { headers: newHeaders }) };
     },
     hooks: { after: [{
       matcher(context) {
@@ -8566,12 +8551,18 @@ var expo = (options) => {
         const location = headers?.get("location");
         if (!location) return;
         if (location.includes("/oauth-proxy-callback")) return;
-        if (!ctx.context.trustedOrigins.filter((origin) => !origin.startsWith("http")).some((origin) => location?.startsWith(origin))) return;
+        let redirectURL;
+        try {
+          redirectURL = new URL(location);
+        } catch {
+          return;
+        }
+        if (redirectURL.protocol === "http:" || redirectURL.protocol === "https:") return;
+        if (!ctx.context.isTrustedOrigin(location)) return;
         const cookie = headers?.get("set-cookie");
         if (!cookie) return;
-        const url = new URL(location);
-        url.searchParams.set("cookie", cookie);
-        ctx.setHeader("location", url.toString());
+        redirectURL.searchParams.set("cookie", cookie);
+        ctx.setHeader("location", redirectURL.toString());
       })
     }] },
     endpoints: { expoAuthorizationProxy },
@@ -8580,6 +8571,10 @@ var expo = (options) => {
 };
 
 // src/auth.ts
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import dotenv2 from "dotenv";
+dotenv2.config({ path: "../../.env" });
 console.log("BETTER_AUTH_SECRET:", process.env.BETTER_AUTH_SECRET);
 console.log("BETTER_AUTH_URL:", process.env.BETTER_AUTH_URL);
 var auth = betterAuth({
@@ -8620,8 +8615,6 @@ var auth = betterAuth({
 });
 
 // src/index.ts
-import { cors } from "hono/cors";
-import { handle } from "hono/vercel";
 var UpdateStatusSchema = z3.object({
   status: TodoStatusEnum
 });
@@ -8694,12 +8687,16 @@ app.get(
     const db2 = getDb();
     const user2 = c.get("user");
     const data = await db2.select().from(todos).where(eq(todos.userId, user2.id));
-    return c.json(TodoSchema.array().parse(data.map((row) => ({
-      ...row,
-      createdAt: row.createdAt.toISOString(),
-      endAt: row.endAt?.toISOString() ?? null,
-      completedAt: row.completedAt?.toISOString() ?? null
-    }))));
+    return c.json(
+      TodoSchema.array().parse(
+        data.map((row) => ({
+          ...row,
+          createdAt: row.createdAt.toISOString(),
+          endAt: row.endAt?.toISOString() ?? null,
+          completedAt: row.completedAt?.toISOString() ?? null
+        }))
+      )
+    );
   }
 );
 app.post(
@@ -8735,7 +8732,9 @@ app.post(
     const db2 = getDb();
     const body = c.req.valid("json");
     const user2 = c.get("user");
-    if (!user2) return c.json({ error: "Unauthorized" }, 401);
+    if (!user2) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
     const [row] = await db2.insert(todos).values({
       id: nanoid(),
       userId: user2.id,
@@ -8746,12 +8745,15 @@ app.post(
       completed: false,
       createdAt: /* @__PURE__ */ new Date()
     }).returning();
-    return c.json(TodoSchema.parse({
-      ...row,
-      createdAt: row?.createdAt.toISOString(),
-      endAt: row?.endAt?.toISOString(),
-      completedAt: row?.completedAt?.toISOString() ?? null
-    }), 201);
+    return c.json(
+      TodoSchema.parse({
+        ...row,
+        createdAt: row?.createdAt.toISOString(),
+        endAt: row?.endAt?.toISOString(),
+        completedAt: row?.completedAt?.toISOString() ?? null
+      }),
+      201
+    );
   }
 );
 app.patch(
@@ -8802,12 +8804,14 @@ app.patch(
     if (!row) {
       return c.json({ message: "Not found" }, 404);
     }
-    return c.json(TodoSchema.parse({
-      ...row,
-      createdAt: row.createdAt.toISOString(),
-      endAt: row.endAt?.toISOString() ?? null,
-      completedAt: row.completedAt?.toISOString() ?? null
-    }));
+    return c.json(
+      TodoSchema.parse({
+        ...row,
+        createdAt: row.createdAt.toISOString(),
+        endAt: row.endAt?.toISOString() ?? null,
+        completedAt: row.completedAt?.toISOString() ?? null
+      })
+    );
   }
 );
 app.delete(
@@ -8849,18 +8853,32 @@ app.delete(
     return c.body(null, 204);
   }
 );
-app.get("/doc", openAPIRouteHandler(app, {
-  documentation: {
-    servers: [{
-      url: "/api"
-    }]
-  }
-}));
-app.get("/scalar-docs", Scalar((c) => ({
-  url: new URL("/api/doc", c.req.url).toString(),
-  theme: "deepSpace",
-  layout: "modern"
-})));
+app.get(
+  "/doc",
+  openAPIRouteHandler(app, {
+    documentation: {
+      servers: [
+        {
+          url: "/api"
+        }
+      ]
+    }
+  })
+);
+app.get(
+  "/scalar-docs",
+  Scalar((c) => ({
+    url: new URL("/api/doc", c.req.url).toString(),
+    theme: "deepSpace",
+    layout: "modern"
+  }))
+);
+serve({
+  fetch: app.fetch,
+  port: 3e3,
+  hostname: "0.0.0.0"
+});
+console.log("http://localhost:3000");
 var config = { runtime: "nodejs" };
 var index_default = handle(app);
 export {

@@ -3,8 +3,8 @@ import { cn } from "@workspace/ui/lib/utils";
 
 interface StatCardProps {
   label: string;
-  value: number;
   total: number;
+  value: number;
   variant: "today" | "pending" | "completed" | "backlog" | "cancelled";
 }
 
@@ -15,7 +15,6 @@ const variantStyles: Record<StatCardProps["variant"], string> = {
   backlog: "text-gray-700",
   cancelled: "text-red-600",
 };
-
 
 const descriptionMap: Record<StatCardProps["variant"], string> = {
   today: "Tasks created today",
@@ -37,62 +36,58 @@ export default function StatCard({
   const stroke = 5;
   const normalizedRadius = radius - stroke / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
-  const strokeDashoffset =
-    circumference - (percentage / 100) * circumference;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <Card className="shadow-md hover:shadow-lg transition-shadow rounded-lg border border-gray-100">
+    <Card className="rounded-lg border border-gray-100 shadow-md transition-shadow hover:shadow-lg">
       <CardContent className="flex items-center justify-between p-6">
-   
         <div className="flex flex-col gap-1">
-          <span className="text-[12px] font-medium text-muted-foreground">
+          <span className="font-medium text-[12px] text-muted-foreground">
             {label.toUpperCase()}
           </span>
 
           <span
             className={cn(
-              "text-5xl font-bold tracking-tight",
+              "font-bold text-5xl tracking-tight",
               variantStyles[variant]
             )}
           >
             {value}
           </span>
-             <span className="text-xs text-muted-foreground">
+          <span className="text-muted-foreground text-xs">
             {descriptionMap[variant]}
           </span>
         </div>
 
-    
         <div className="relative flex items-center justify-center">
           <svg height={radius * 2} width={radius * 2}>
-          
             <circle
-              stroke="#e5e7eb"
-              fill="transparent"
-              strokeWidth={stroke}
-              r={normalizedRadius}
               cx={radius}
               cy={radius}
+              fill="transparent"
+              r={normalizedRadius}
+              stroke="#e5e7eb"
+              strokeWidth={stroke}
             />
 
             <circle
-              stroke="currentColor"
+              className={variantStyles[variant]}
+              cx={radius}
+              cy={radius}
               fill="transparent"
-              strokeWidth={stroke}
-              strokeLinecap="round"
+              r={normalizedRadius}
+              stroke="currentColor"
               strokeDasharray={`${circumference} ${circumference}`}
+              strokeLinecap="round"
+              strokeWidth={stroke}
               style={{
                 strokeDashoffset,
                 transition: "stroke-dashoffset 0.7s ease-out",
               }}
-              r={normalizedRadius}
-              cx={radius}
-              cy={radius}
-              className={variantStyles[variant]}
             />
           </svg>
 
-          <div className="absolute text-sm font-semibold">
+          <div className="absolute font-semibold text-sm">
             {Math.round(percentage)}%
           </div>
         </div>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Card,
   CardContent,
@@ -7,18 +7,15 @@ import {
 } from "@workspace/ui/components/card";
 
 import { Progress } from "@workspace/ui/components/progress";
-import { useTodoQuery} from "../../hooks/queryhook"
+import { useTodoQuery } from "../../hooks/queryhook";
 
 export function TodoProgress() {
   const { data: todos = [] } = useTodoQuery();
 
   const total = todos.length;
-  const completed = todos.filter(
-    (t) => t.status === "completed"
-  ).length;
+  const completed = todos.filter((t) => t.status === "completed").length;
 
-  const percentage =
-    total === 0 ? 0 : Math.round((completed / total) * 100);
+  const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
 
   return (
     <Card>
@@ -28,17 +25,13 @@ export function TodoProgress() {
 
       <CardContent className="space-y-4">
         <div className="flex items-end justify-between">
-          <span className="text-sm text-muted-foreground">
-            Progress
-          </span>
-          <span className="text-2xl font-semibold">
-            {percentage}%
-          </span>
+          <span className="text-muted-foreground text-sm">Progress</span>
+          <span className="font-semibold text-2xl">{percentage}%</span>
         </div>
 
         <Progress value={percentage} />
 
-        <p className="text-xs text-muted-foreground">
+        <p className="text-muted-foreground text-xs">
           {completed} of {total} tasks completed
         </p>
       </CardContent>

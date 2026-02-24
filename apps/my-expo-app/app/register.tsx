@@ -1,20 +1,20 @@
+import { Ionicons } from "@expo/vector-icons";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v4";
 import { authClient } from "@/lib/authClient";
-import { Link, useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 
 const registerSchema = z
   .object({
@@ -51,22 +51,27 @@ export default function RegisterScreen() {
   });
 
   const onSubmit = async (values: RegisterForm) => {
-    const { error } = await authClient.signUp.email({
-      name: values.name,
-      email: values.email,
-      password: values.password,
-    });
+    try {
+      const { error } = await authClient.signUp.email({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      });
 
-    if (error) {
-      Alert.alert("Registration Failed", error.message);
-      return;
+      if (error) {
+        Alert.alert("Registration Failed", error.message);
+        return;
+      }
+
+      Alert.alert("Success", "Account created successfully!", [{ text: "OK" }]);
+    } catch (err) {
+      console.error("REGISTER EXCEPTION:", err);
+
+      const message =
+        err instanceof Error ? err.message : "Something went wrong";
+
+      Alert.alert("Registration Failed", message);
     }
-
-    Alert.alert("Success", "Account created successfully!", [
-      {
-        text: "OK",
-      },
-    ]);
   };
 
   return (
@@ -79,16 +84,15 @@ export default function RegisterScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View className="px-6">
-        
-          <Text className="text-3xl font-bold text-center text-black mb-2">
+          <Text className="mb-2 text-center font-bold text-3xl text-black">
             Create Account
           </Text>
-          <Text className="text-sm text-center text-gray-500 mb-8">
+          <Text className="mb-8 text-center text-gray-500 text-sm">
             Sign up to get started
           </Text>
 
           <View className="mb-4">
-            <Text className="text-sm font-semibold text-gray-700 mb-1">
+            <Text className="mb-1 font-semibold text-gray-700 text-sm">
               Name
             </Text>
             <Controller
@@ -96,19 +100,19 @@ export default function RegisterScreen() {
               name="name"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                  className={`border rounded-xl px-4 py-3 text-sm text-black ${
+                  className={`rounded-xl border px-4 py-3 text-black text-sm ${
                     errors.name ? "border-red-500" : "border-gray-300"
                   }`}
-                  placeholder="Enter your name"
-                  placeholderTextColor="#9ca3af"
                   onBlur={onBlur}
                   onChangeText={onChange}
+                  placeholder="Enter your name"
+                  placeholderTextColor="#9ca3af"
                   value={value}
                 />
               )}
             />
             {errors.name && (
-              <Text className="text-red-500 text-xs mt-1">
+              <Text className="mt-1 text-red-500 text-xs">
                 {errors.name.message}
               </Text>
             )}
@@ -116,7 +120,7 @@ export default function RegisterScreen() {
 
           {/* Email */}
           <View className="mb-4">
-            <Text className="text-sm font-semibold text-gray-700 mb-1">
+            <Text className="mb-1 font-semibold text-gray-700 text-sm">
               Email
             </Text>
             <Controller
@@ -124,29 +128,28 @@ export default function RegisterScreen() {
               name="email"
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
-                  className={`border rounded-xl px-4 py-3 text-sm text-black ${
+                  autoCapitalize="none"
+                  className={`rounded-xl border px-4 py-3 text-black text-sm ${
                     errors.email ? "border-red-500" : "border-gray-300"
                   }`}
-                  placeholder="Enter your email"
-                  placeholderTextColor="#9ca3af"
+                  keyboardType="email-address"
                   onBlur={onBlur}
                   onChangeText={onChange}
+                  placeholder="Enter your email"
+                  placeholderTextColor="#9ca3af"
                   value={value}
-                  autoCapitalize="none"
-                  keyboardType="email-address"
                 />
               )}
             />
             {errors.email && (
-              <Text className="text-red-500 text-xs mt-1">
+              <Text className="mt-1 text-red-500 text-xs">
                 {errors.email.message}
               </Text>
             )}
           </View>
 
-          
           <View className="mb-4">
-            <Text className="text-sm font-semibold text-gray-700 mb-1">
+            <Text className="mb-1 font-semibold text-gray-700 text-sm">
               Password
             </Text>
 
@@ -156,39 +159,31 @@ export default function RegisterScreen() {
               render={({ field: { onChange, onBlur, value } }) => (
                 <View className="relative">
                   <TextInput
-                    className={`border rounded-xl px-4 py-3 pr-14 text-sm text-black ${
-                      errors.password
-                        ? "border-red-500"
-                        : "border-gray-300"
+                    className={`rounded-xl border px-4 py-3 pr-14 text-black text-sm ${
+                      errors.password ? "border-red-500" : "border-gray-300"
                     }`}
-                    placeholder="Enter your password"
-                    placeholderTextColor="#9ca3af"
                     onBlur={onBlur}
                     onChangeText={onChange}
-                    value={value}
+                    placeholder="Enter your password"
+                    placeholderTextColor="#9ca3af"
                     secureTextEntry={!showPassword}
+                    value={value}
                   />
 
                   <TouchableOpacity
-                    onPress={() =>
-                      setShowPassword(!showPassword)
-                    }
-                    className="absolute right-4 inset-y-0 justify-center"
+                    className="absolute inset-y-0 right-4 justify-center"
                     hitSlop={{
                       top: 10,
                       bottom: 10,
                       left: 10,
                       right: 10,
                     }}
+                    onPress={() => setShowPassword(!showPassword)}
                   >
                     <Ionicons
-                      name={
-                        showPassword
-                          ? "eye-off-outline"
-                          : "eye-outline"
-                      }
-                      size={22}
                       color="#6b7280"
+                      name={showPassword ? "eye-off-outline" : "eye-outline"}
+                      size={22}
                     />
                   </TouchableOpacity>
                 </View>
@@ -196,15 +191,14 @@ export default function RegisterScreen() {
             />
 
             {errors.password && (
-              <Text className="text-red-500 text-xs mt-1">
+              <Text className="mt-1 text-red-500 text-xs">
                 {errors.password.message}
               </Text>
             )}
           </View>
 
-        
           <View className="mb-6">
-            <Text className="text-sm font-semibold text-gray-700 mb-1">
+            <Text className="mb-1 font-semibold text-gray-700 text-sm">
               Confirm Password
             </Text>
 
@@ -214,41 +208,35 @@ export default function RegisterScreen() {
               render={({ field: { onChange, onBlur, value } }) => (
                 <View className="relative">
                   <TextInput
-                    className={`border rounded-xl px-4 py-3 pr-14 text-sm text-black ${
+                    className={`rounded-xl border px-4 py-3 pr-14 text-black text-sm ${
                       errors.confirmPassword
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
-                    placeholder="••••••••"
-                    placeholderTextColor="#9ca3af"
                     onBlur={onBlur}
                     onChangeText={onChange}
-                    value={value}
+                    placeholder="••••••••"
+                    placeholderTextColor="#9ca3af"
                     secureTextEntry={!showConfirmPassword}
+                    value={value}
                   />
 
                   <TouchableOpacity
-                    onPress={() =>
-                      setShowConfirmPassword(
-                        !showConfirmPassword
-                      )
-                    }
-                    className="absolute right-4 inset-y-0 justify-center"
+                    className="absolute inset-y-0 right-4 justify-center"
                     hitSlop={{
                       top: 10,
                       bottom: 10,
                       left: 10,
                       right: 10,
                     }}
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     <Ionicons
+                      color="#6b7280"
                       name={
-                        showConfirmPassword
-                          ? "eye-off-outline"
-                          : "eye-outline"
+                        showConfirmPassword ? "eye-off-outline" : "eye-outline"
                       }
                       size={22}
-                      color="#6b7280"
                     />
                   </TouchableOpacity>
                 </View>
@@ -256,34 +244,29 @@ export default function RegisterScreen() {
             />
 
             {errors.confirmPassword && (
-              <Text className="text-red-500 text-xs mt-1">
+              <Text className="mt-1 text-red-500 text-xs">
                 {errors.confirmPassword.message}
               </Text>
             )}
           </View>
 
-      
           <TouchableOpacity
-            className={`py-4 rounded-xl items-center ${
+            className={`items-center rounded-xl py-4 ${
               isSubmitting ? "bg-gray-400" : "bg-black"
             }`}
-            onPress={handleSubmit(onSubmit)}
             disabled={isSubmitting}
+            onPress={handleSubmit(onSubmit)}
           >
-            <Text className="text-white font-semibold text-base">
-              {isSubmitting
-                ? "Creating account..."
-                : "Sign Up"}
+            <Text className="font-semibold text-base text-white">
+              {isSubmitting ? "Creating account..." : "Sign Up"}
             </Text>
           </TouchableOpacity>
 
-          <Link href="/login" asChild>
+          <Link asChild href="/login">
             <TouchableOpacity className="mt-6 items-center">
-              <Text className="text-sm text-gray-500">
+              <Text className="text-gray-500 text-sm">
                 Already have an account?{" "}
-                <Text className="text-black font-semibold">
-                  Sign In
-                </Text>
+                <Text className="font-semibold text-black">Sign In</Text>
               </Text>
             </TouchableOpacity>
           </Link>

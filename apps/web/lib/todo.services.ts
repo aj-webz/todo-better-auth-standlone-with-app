@@ -1,31 +1,31 @@
 "use client";
 
 import {
-  TodoSchema,
-  type Todo,
   type CreateTodoFormInput,
+  type Todo,
+  TodoSchema,
   type TodoStatusEnum,
 } from "@repo/shared";
-import z from "zod"
+import type z from "zod";
 
-const baseUrl = process.env.NODE_ENV === "production"
-  ? "https://todo-better-auth-standalone-server.vercel.app/api/todos"
-  : "http://localhost:3001/api/todos";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://todo-better-auth-standalone-server.vercel.app/api/todos"
+    : "http://localhost:3001/api/todos";
 
- type TodoStatus = z.infer<typeof TodoStatusEnum>
+type TodoStatus = z.infer<typeof TodoStatusEnum>;
 export async function readTodos(): Promise<Todo[]> {
   const res = await fetch(baseUrl);
 
-  if (!res.ok) throw new Error("Failed to fetch");
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
 
   const json = await res.json();
   return json.map((t: unknown) => TodoSchema.parse(t));
 }
 
-
-export async function createTodo(
-  input: CreateTodoFormInput
-): Promise<Todo> {
+export async function createTodo(input: CreateTodoFormInput): Promise<Todo> {
   const res = await fetch(baseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -38,7 +38,6 @@ export async function createTodo(
 
   return TodoSchema.parse(await res.json());
 }
-
 
 export async function updateTodoStatus(
   id: string,
@@ -56,7 +55,6 @@ export async function updateTodoStatus(
 
   return TodoSchema.parse(await res.json());
 }
-
 
 export async function deleteTodo(id: string): Promise<void> {
   const res = await fetch(`${baseUrl}/${id}`, {

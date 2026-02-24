@@ -1,8 +1,8 @@
-import { View, Text, TouchableOpacity, Modal, Pressable } from "react-native";
-import { useState } from "react";
-import { authClient } from "@/lib/authClient";
-import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { useState } from "react";
+import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { authClient } from "@/lib/authClient";
 
 export default function AvatarMenu() {
   const { data: session } = authClient.useSession();
@@ -22,8 +22,8 @@ export default function AvatarMenu() {
   return (
     <>
       <TouchableOpacity
+        className="h-10 w-10 items-center justify-center rounded-full bg-[#9333EA]"
         onPress={() => setOpen(true)}
-        className="w-10 h-10 rounded-full bg-[#9333EA] items-center justify-center"
         style={{
           shadowColor: "#9333EA",
           shadowOpacity: 0.5,
@@ -31,16 +31,16 @@ export default function AvatarMenu() {
           shadowOffset: { width: 0, height: 4 },
         }}
       >
-        <Text className="text-white font-extrabold text-xl">{initial}</Text>
+        <Text className="font-extrabold text-white text-xl">{initial}</Text>
       </TouchableOpacity>
 
-      <Modal visible={open} transparent animationType="fade">
+      <Modal animationType="fade" transparent visible={open}>
         <Pressable
           onPress={() => setOpen(false)}
           style={{ flex: 1, backgroundColor: "rgba(255,255,255,0.6)" }}
         >
           <View
-            className="absolute top-24 right-5 bg-white rounded-2xl overflow-hidden"
+            className="absolute top-24 right-5 overflow-hidden rounded-2xl bg-white"
             style={{
               borderWidth: 1,
               borderColor: "#E5E7EB",
@@ -51,36 +51,43 @@ export default function AvatarMenu() {
               shadowOffset: { width: 0, height: 4 },
             }}
           >
-       
             <View
-              className="px-4 py-3 border-b border-[#F3F4F6] flex-row items-center"
+              className="flex-row items-center border-[#F3F4F6] border-b px-4 py-3"
               style={{ gap: 10 }}
             >
-              <View className="w-9 h-9 rounded-full bg-[#9333EA] items-center justify-center">
-                <Text className="text-white font-bold text-base">{initial}</Text>
+              <View className="h-9 w-9 items-center justify-center rounded-full bg-[#9333EA]">
+                <Text className="font-bold text-base text-white">
+                  {initial}
+                </Text>
               </View>
-              <Text className="text-gray-800 font-semibold text-sm" numberOfLines={1}>
+              <Text
+                className="font-semibold text-gray-800 text-sm"
+                numberOfLines={1}
+              >
                 {session?.user?.name ?? "User"}
               </Text>
             </View>
 
-       
             <TouchableOpacity
+              className="flex-row items-center border-[#F3F4F6] border-b px-4 py-3"
               onPress={handleDashboard}
-              className="px-4 py-3 border-b border-[#F3F4F6] flex-row items-center"
               style={{ gap: 10 }}
             >
-              <Ionicons name="bar-chart-outline" size={16} color="#4338ca" />
-              <Text className="text-indigo-700 text-sm font-semibold">Dashboard</Text>
+              <Ionicons color="#4338ca" name="bar-chart-outline" size={16} />
+              <Text className="font-semibold text-indigo-700 text-sm">
+                Dashboard
+              </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
+              className="flex-row items-center px-4 py-3"
               onPress={handleSignOut}
-              className="px-4 py-3 flex-row items-center"
               style={{ gap: 10 }}
             >
-              <Ionicons name="log-out-outline" size={16} color="#EF4444" />
-              <Text className="text-red-500 text-sm font-semibold">Sign Out</Text>
+              <Ionicons color="#EF4444" name="log-out-outline" size={16} />
+              <Text className="font-semibold text-red-500 text-sm">
+                Sign Out
+              </Text>
             </TouchableOpacity>
           </View>
         </Pressable>

@@ -42,10 +42,7 @@
                         },
                         "role": {
                           "type": "string",
-                          "enum": [
-                            "user",
-                            "admin"
-                          ]
+                          "enum": ["user", "admin"]
                         },
                         "createdAt": {
                           "type": "string",
@@ -61,10 +58,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "success",
-                    "user"
-                  ]
+                  "required": ["success", "user"]
                 }
               }
             }
@@ -80,9 +74,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -98,9 +90,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -116,9 +106,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -140,17 +128,10 @@
                   },
                   "role": {
                     "type": "string",
-                    "enum": [
-                      "user",
-                      "admin"
-                    ]
+                    "enum": ["user", "admin"]
                   }
                 },
-                "required": [
-                  "email",
-                  "password",
-                  "role"
-                ]
+                "required": ["email", "password", "role"]
               }
             }
           }
@@ -188,10 +169,7 @@
                         },
                         "role": {
                           "type": "string",
-                          "enum": [
-                            "user",
-                            "admin"
-                          ]
+                          "enum": ["user", "admin"]
                         },
                         "createdAt": {
                           "type": "string",
@@ -207,10 +185,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "success",
-                    "user"
-                  ]
+                  "required": ["success", "user"]
                 }
               }
             }
@@ -226,9 +201,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -244,9 +217,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -262,9 +233,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -280,9 +249,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -304,17 +271,10 @@
                   },
                   "role": {
                     "type": "string",
-                    "enum": [
-                      "user",
-                      "admin"
-                    ]
+                    "enum": ["user", "admin"]
                   }
                 },
-                "required": [
-                  "email",
-                  "password",
-                  "role"
-                ]
+                "required": ["email", "password", "role"]
               }
             }
           }
@@ -337,9 +297,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "success"
-                  ]
+                  "required": ["success"]
                 }
               }
             }
@@ -355,9 +313,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -391,27 +347,16 @@
                         },
                         "role": {
                           "type": "string",
-                          "enum": [
-                            "user",
-                            "admin"
-                          ]
+                          "enum": ["user", "admin"]
                         },
                         "exp": {
                           "type": "number"
                         }
                       },
-                      "required": [
-                        "sub",
-                        "email",
-                        "role",
-                        "exp"
-                      ]
+                      "required": ["sub", "email", "role", "exp"]
                     }
                   },
-                  "required": [
-                    "authenticated",
-                    "user"
-                  ]
+                  "required": ["authenticated", "user"]
                 }
               }
             }
@@ -427,9 +372,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -445,9 +388,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -495,10 +436,7 @@
                         "type": "string"
                       },
                       "endAt": {
-                        "type": [
-                          "string",
-                          "null"
-                        ]
+                        "type": ["string", "null"]
                       }
                     },
                     "required": [
@@ -526,9 +464,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -572,10 +508,7 @@
                       "type": "string"
                     },
                     "endAt": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                      "type": ["string", "null"]
                     }
                   },
                   "required": [
@@ -602,9 +535,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -620,9 +551,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -650,12 +579,7 @@
                     "pattern": "^([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d)$"
                   }
                 },
-                "required": [
-                  "title",
-                  "description",
-                  "dueDate",
-                  "dueTime"
-                ]
+                "required": ["title", "description", "dueDate", "dueTime"]
               }
             }
           }
@@ -700,10 +624,7 @@
                       "type": "string"
                     },
                     "endAt": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                      "type": ["string", "null"]
                     }
                   },
                   "required": [
@@ -730,9 +651,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -748,9 +667,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -766,9 +683,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }
@@ -791,9 +706,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "status"
-                ]
+                "required": ["status"]
               }
             }
           }
@@ -830,9 +743,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -848,9 +759,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "message"
-                  ]
+                  "required": ["message"]
                 }
               }
             }

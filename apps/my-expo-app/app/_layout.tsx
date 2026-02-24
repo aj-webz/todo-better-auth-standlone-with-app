@@ -1,12 +1,11 @@
 import { Stack } from "expo-router";
-import { View, ActivityIndicator } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import "global.css";
-import { authClient } from "@/lib/authClient";
-import { Text } from "react-native";
-import { Provider } from "@/lib/query-provider";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AvatarMenu from "@/components/AvatarMenu";
+import { authClient } from "@/lib/authClient";
+import { Provider } from "@/lib/query-provider";
 
 function Layout() {
   const { data: session, isPending } = authClient.useSession();
@@ -27,9 +26,9 @@ function Layout() {
         headerStyle: { backgroundColor: "#000000" },
         headerShadowVisible: false,
         headerTitle: "",
-        headerTintColor:"#CF9FFF",
+        headerTintColor: "#CF9FFF",
         headerRight: () => (
-          <View style={{ marginRight: 16 ,marginBottom:5}}>
+          <View style={{ marginRight: 16, marginBottom: 5 }}>
             <AvatarMenu />
           </View>
         ),

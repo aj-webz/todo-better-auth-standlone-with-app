@@ -3,9 +3,10 @@ import createClient from "openapi-react-query";
 import type { paths } from "./api-schema";
 
 const fetchClient = createFetchClient<paths>({
-  baseUrl: process.env.NODE_ENV === "production"
-    ? "https://todo-better-auth-standalone-server.vercel.app"
-    : "http://localhost:3001",
+  baseUrl:
+    process.env.NODE_ENV === "production"
+      ? "https://todo-better-auth-standalone-server.vercel.app"
+      : "http://localhost:3001",
   fetch: (input: RequestInfo | URL, init?: RequestInit) =>
     fetch(input, {
       ...init,
@@ -13,5 +14,5 @@ const fetchClient = createFetchClient<paths>({
     }),
 });
 
-export const $api = createClient(fetchClient);  
+export const $api = createClient(fetchClient);
 export type { paths };

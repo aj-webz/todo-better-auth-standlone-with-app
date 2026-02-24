@@ -6,7 +6,10 @@
   "main": "./index.js",
   "types": "./src/index.ts",
   "exports": {
-    ".": ["./src/index.ts","./api/index.js"]
+    ".": [
+      "./src/index.ts",
+      "./api/index.js"
+    ]
   },
   "scripts": {
     "dev": "pnpm exec tsx watch --require dotenv/config src/index.ts",

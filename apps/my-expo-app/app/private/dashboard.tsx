@@ -1,19 +1,19 @@
-import { View, Text, ScrollView, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Dimensions, ScrollView, Text, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
-import { useTodoQuery } from "@/hooks/api-hooks";
+import { SafeAreaView } from "react-native-safe-area-context";
 import CardLayout from "@/components/DashStatus";
+import { useTodoQuery } from "@/hooks/api-hooks";
 
 const screenWidth = Dimensions.get("window").width;
 
 export default function DashboardScreen() {
   const { data: todos = [] } = useTodoQuery();
 
-  const total     = todos.length;
-  const today     = todos.filter((t) => t.status === "in-progress").length;
-  const pending   = todos.filter((t) => t.status === "todo").length;
+  const total = todos.length;
+  const today = todos.filter((t) => t.status === "in-progress").length;
+  const pending = todos.filter((t) => t.status === "todo").length;
   const completed = todos.filter((t) => t.status === "completed").length;
-  const backlog   = todos.filter((t) => t.status === "backlog").length;
+  const backlog = todos.filter((t) => t.status === "backlog").length;
   const cancelled = todos.filter((t) => t.status === "cancelled").length;
 
   const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
@@ -33,15 +33,11 @@ export default function DashboardScreen() {
           >
             Dashboard
           </Text>
-          <Text
-            className="text-sm"
-            style={{ color: "#A78BFA", marginTop: 4 }}
-          >
+          <Text className="text-sm" style={{ color: "#A78BFA", marginTop: 4 }}>
             Your productivity at a glance
           </Text>
         </View>
 
-       
         <View
           className="rounded-3xl"
           style={{
@@ -56,7 +52,12 @@ export default function DashboardScreen() {
         >
           <Text
             className="font-semibold"
-            style={{ color: "#DDD6FE", fontSize: 13, marginBottom: 6, letterSpacing: 0.5 }}
+            style={{
+              color: "#DDD6FE",
+              fontSize: 13,
+              marginBottom: 6,
+              letterSpacing: 0.5,
+            }}
           >
             OVERALL COMPLETION
           </Text>
@@ -84,11 +85,7 @@ export default function DashboardScreen() {
           </Text>
         </View>
 
-      
-        <View
-          className="flex-row"
-          style={{ gap: 12, marginBottom: 28 }}
-        >
+        <View className="flex-row" style={{ gap: 12, marginBottom: 28 }}>
           <View
             className="flex-1 items-center"
             style={{
@@ -99,8 +96,18 @@ export default function DashboardScreen() {
               borderColor: "#E9D5FF",
             }}
           >
-            <Text className="font-extrabold" style={{ fontSize: 28, color: "#7C3AED" }}>{total}</Text>
-            <Text className="font-semibold" style={{ fontSize: 11, color: "#A78BFA", marginTop: 4 }}>TOTAL</Text>
+            <Text
+              className="font-extrabold"
+              style={{ fontSize: 28, color: "#7C3AED" }}
+            >
+              {total}
+            </Text>
+            <Text
+              className="font-semibold"
+              style={{ fontSize: 11, color: "#A78BFA", marginTop: 4 }}
+            >
+              TOTAL
+            </Text>
           </View>
           <View
             className="flex-1 items-center"
@@ -112,8 +119,18 @@ export default function DashboardScreen() {
               borderColor: "#C7D2FE",
             }}
           >
-            <Text className="font-extrabold" style={{ fontSize: 28, color: "#4338CA" }}>{today}</Text>
-            <Text className="font-semibold" style={{ fontSize: 11, color: "#818CF8", marginTop: 4 }}>ACTIVE</Text>
+            <Text
+              className="font-extrabold"
+              style={{ fontSize: 28, color: "#4338CA" }}
+            >
+              {today}
+            </Text>
+            <Text
+              className="font-semibold"
+              style={{ fontSize: 11, color: "#818CF8", marginTop: 4 }}
+            >
+              ACTIVE
+            </Text>
           </View>
           <View
             className="flex-1 items-center"
@@ -125,12 +142,21 @@ export default function DashboardScreen() {
               borderColor: "#BBF7D0",
             }}
           >
-            <Text className="font-extrabold" style={{ fontSize: 28, color: "#16A34A" }}>{completed}</Text>
-            <Text className="font-semibold" style={{ fontSize: 11, color: "#4ADE80", marginTop: 4 }}>DONE</Text>
+            <Text
+              className="font-extrabold"
+              style={{ fontSize: 28, color: "#16A34A" }}
+            >
+              {completed}
+            </Text>
+            <Text
+              className="font-semibold"
+              style={{ fontSize: 11, color: "#4ADE80", marginTop: 4 }}
+            >
+              DONE
+            </Text>
           </View>
         </View>
 
-        
         <Text
           className="font-bold"
           style={{ fontSize: 16, color: "#3B0764", marginBottom: 14 }}
@@ -141,7 +167,6 @@ export default function DashboardScreen() {
           <CardLayout />
         </View>
 
-     
         <Text
           className="font-bold"
           style={{ fontSize: 16, color: "#3B0764", marginBottom: 14 }}
@@ -149,7 +174,7 @@ export default function DashboardScreen() {
           Tasks by Status
         </Text>
         <View
-          className="bg-white overflow-hidden"
+          className="overflow-hidden bg-white"
           style={{
             borderRadius: 24,
             paddingTop: 16,
@@ -162,15 +187,6 @@ export default function DashboardScreen() {
           }}
         >
           <BarChart
-            data={{
-              labels: ["Active", "Todo", "Done", "Backlog", "Cancel"],
-              datasets: [{ data: [today, pending, completed, backlog, cancelled] }],
-            }}
-            width={screenWidth - 40}
-            height={240}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1}
             chartConfig={{
               backgroundColor: "#ffffff",
               backgroundGradientFrom: "#ffffff",
@@ -181,13 +197,23 @@ export default function DashboardScreen() {
               barPercentage: 0.6,
               propsForBackgroundLines: { stroke: "#F3E8FF" },
             }}
-            style={{ borderRadius: 16 }}
-            showValuesOnTopOfBars
-            withInnerLines
+            data={{
+              labels: ["Active", "Todo", "Done", "Backlog", "Cancel"],
+              datasets: [
+                { data: [today, pending, completed, backlog, cancelled] },
+              ],
+            }}
             fromZero
+            height={240}
+            showValuesOnTopOfBars
+            style={{ borderRadius: 16 }}
+            width={screenWidth - 40}
+            withInnerLines
+            yAxisInterval={1}
+            yAxisLabel=""
+            yAxisSuffix=""
           />
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,9 +1,10 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
-import { $api } from "@/lib/api-client";
 import type { paths } from "@/lib/api-client";
+import { $api } from "@/lib/api-client";
 
-type Todo = paths["/api/todos"]["get"]["responses"][200]["content"]["application/json"][number];
+type Todo =
+  paths["/api/todos"]["get"]["responses"][200]["content"]["application/json"][number];
 
 const todosQueryKey = $api.queryOptions("get", "/api/todos").queryKey;
 
@@ -40,10 +41,11 @@ export function useUpdateTodoStatus() {
               ? {
                   ...todo,
                   status: body?.status ?? todo.status,
-                  completed: body?.status === "completed",        
-                  completedAt: body?.status === "completed"
-                    ? new Date().toISOString()
-                    : null,
+                  completed: body?.status === "completed",
+                  completedAt:
+                    body?.status === "completed"
+                      ? new Date().toISOString()
+                      : null,
                 }
               : todo
           )

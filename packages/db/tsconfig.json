@@ -1,6 +1,6 @@
 {
   "extends": "@workspace/typescript-config/base.json",
-  "compilerOptions":{
+  "compilerOptions": {
     // File Layout
     "rootDir": ".",
     "outDir": "./dist",
@@ -26,12 +26,10 @@
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
     // Recommended Options
-    "lib": [
-      "ES2022"
-    ],
+    "lib": ["ES2022"],
     "strict": true,
     "moduleDetection": "force",
     "moduleResolution": "bundler",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   }
 }

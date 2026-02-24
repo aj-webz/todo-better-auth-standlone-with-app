@@ -1,18 +1,17 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ThemeProvider as NextThemesProvider } from "next-themes"
-import { QueryClient } from "@tanstack/react-query";
-import { QueryClientProvider } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import type * as React from "react";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 1000 * 60,
       refetchOnWindowFocus: false,
-    }
-  }
-})
+    },
+  },
+});
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -20,12 +19,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <NextThemesProvider
         attribute="class"
         defaultTheme="system"
-        enableSystem
         disableTransitionOnChange
         enableColorScheme
+        enableSystem
       >
         {children}
       </NextThemesProvider>
     </QueryClientProvider>
-  )
+  );
 }
