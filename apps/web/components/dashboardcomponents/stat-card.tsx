@@ -60,7 +60,12 @@ export default function StatCard({
         </div>
 
         <div className="relative flex items-center justify-center">
-          <svg height={radius * 2} width={radius * 2}>
+          <svg
+            aria-label={`${label} progress: ${Math.round(percentage)} percent`}
+            height={radius * 2}
+            role="img"
+            width={radius * 2}
+          >
             <circle
               cx={radius}
               cy={radius}
@@ -69,7 +74,7 @@ export default function StatCard({
               stroke="#e5e7eb"
               strokeWidth={stroke}
             />
-
+            <title>{`${label} progress: ${Math.round(percentage)}%`}</title>
             <circle
               className={variantStyles[variant]}
               cx={radius}

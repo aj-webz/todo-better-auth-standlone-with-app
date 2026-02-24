@@ -1,9 +1,9 @@
 "use client";
 
 import { DashboardStats } from "@/components/dashboardcomponents/CardStatus";
-import StatCard from "@/components/dashboardcomponents/StatCard";
-import { TodoStatusChart } from "@/components/dashboardcomponents/TodoCharts";
+import StatCard from "@/components/dashboardcomponents/stat-card";
 import { TodoProgress } from "@/components/dashboardcomponents/TodoProgress";
+import { TodoStatusChart } from "@/components/dashboardcomponents/todo-charts";
 import Sidebar from "@/components/sidebar/Sidebar";
 import { useTodoQuery } from "@/hooks/queryhook";
 

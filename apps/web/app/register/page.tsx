@@ -15,7 +15,7 @@ import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -31,8 +31,6 @@ export default function RegisterPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormInput>({ resolver: zodResolver(RegisterSchema) });
-
-  const router = useRouter();
 
   const { mutate: registerUser, isPending } = useMutation({
     mutationFn: async (values: RegisterFormInput) => {

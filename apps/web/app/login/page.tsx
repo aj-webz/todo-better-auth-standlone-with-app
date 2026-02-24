@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const { data: session, error } = await authClient.signIn.email({
+      const { error } = await authClient.signIn.email({
         email: data.email,
         password: data.password,
       });
