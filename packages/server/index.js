@@ -4866,9 +4866,6 @@ var init_index_DZEfthgZ = __esm({
   }
 });
 
-// src/index.ts
-import { serve } from "@hono/node-server";
-
 // ../db/src/index.ts
 import dotenv from "dotenv";
 import { drizzle } from "drizzle-orm/postgres-js";
@@ -8873,12 +8870,6 @@ app.get(
     layout: "modern"
   }))
 );
-serve({
-  fetch: app.fetch,
-  port: 3e3,
-  hostname: "0.0.0.0"
-});
-console.log("http://localhost:3001");
 var config = { runtime: "nodejs" };
 var index_default = handle(app);
 export {
