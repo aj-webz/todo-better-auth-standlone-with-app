@@ -2,12 +2,12 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entry: ["src/index.ts"],
-  outDir: ".",
+  outDir: "dist",
   format: ["esm"],
   // target: "es2024",
   bundle: true,
   splitting: false,
-  clean: false,
+  clean: true,
   platform: "node",
   minify: false,
   //shims: true,

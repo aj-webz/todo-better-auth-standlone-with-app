@@ -13,12 +13,12 @@
     //"esModuleInterop": true,
     "types": ["node"],
     //"rootDir": "src",
-    "outDir": ".",
+    // "outDir": "./dist", pointless due to noEmit
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "api/**/*"],
-  "exclude": ["node_modules", "api"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
