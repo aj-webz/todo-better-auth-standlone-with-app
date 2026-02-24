@@ -1,5 +1,6 @@
 //import bcrypt from "bcryptjs";
 
+import { serve } from "@hono/node-server";
 import { getDb, todos } from "@repo/db";
 import {
   CreateTodoSchema,
@@ -24,8 +25,6 @@ import {
 import { nanoid } from "nanoid";
 import z from "zod";
 import { auth } from "./auth";
-
-//import { serve } from "@hono/node-server"zz
 
 type Variables = {
   user: typeof auth.$Infer.Session.user | null;
@@ -548,12 +547,12 @@ app.get(
   }))
 );
 
-// serve({
-//   fetch: app.fetch,
-//   port: 3000,
-//   hostname: "0.0.0.0",
-// });
+serve({
+  fetch: app.fetch,
+  port: 3001,
+  hostname: "0.0.0.0",
+});
 
-// console.log("http://localhost:3000");
+console.log("http://localhost:3001");
 export const config = { runtime: "nodejs" };
 export default handle(app);

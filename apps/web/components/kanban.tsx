@@ -23,7 +23,7 @@ import {
   useDeleteTodo,
   useTodoQuery,
   useUpdateTodoStatus,
-} from "../hooks/query-hook.js";
+} from "../hooks/query-hook";
 
 const isTodoStatus = (value: string): value is TodoStatus =>
   ["backlog", "todo", "in-progress", "completed", "cancelled"].includes(value);
@@ -102,7 +102,7 @@ const TimeTicker = ({
   if (remaining <= 0) {
     return (
       <div className="mt-1 flex items-center justify-between">
-        <span className="font-bold text-[10px] text-gray-500">Time Left</span>
+        <span className="font-bold text-[13px] text-gray-500">Time Left</span>
         <span className="rounded-full bg-red-100 px-2 py-0.5 font-bold text-[10px] text-red-600">
           Expired!
         </span>
@@ -124,10 +124,10 @@ const TimeTicker = ({
   }
   return (
     <div className="mt-1 flex items-center justify-between">
-      <span className="font-semibold text-[8px] text-gray-500">Time Left</span>
+      <span className="font-semibold text-[10px] text-gray-500">Time Left</span>
       <span
         className={cn(
-          "rounded-full px-2 py-0.5 font-bold text-[9px]",
+          "rounded-full px-4 py-2 font-bold text-[10px]",
           colorClass
         )}
       >
@@ -282,14 +282,12 @@ const TodoCard = ({
         <div ref={p.innerRef} {...p.draggableProps} {...p.dragHandleProps}>
           <Card
             className={cn(
-              "flex h-70 flex-col justify-between rounded-xl border border-gray-100 shadow-md", // ← h-260 to h-280
+              "flex h-72 flex-col justify-between rounded-xl border border-gray-100 shadow-md",
               getCardBg(todo, now)
             )}
           >
-            <CardContent className="flex h-full flex-col justify-between gap-4 p-6">
-              {" "}
-              <div className="flex flex-col gap-2.5">
-                {" "}
+            <CardContent className="flex h-full flex-col justify-between gap-3 px-4 py-4">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-start justify-between">
                   <h3
                     className="font-bold text-[13px] text-gray-800 leading-snug"
@@ -321,43 +319,43 @@ const TodoCard = ({
                   {todo.description}
                 </p>
               </div>
+
               <div className="border-gray-100 border-t" />
-              <div className="flex items-center justify-between">
+
+              <div className="flex items-center justify-between px-1">
                 <span className="flex flex-col gap-1">
-                  {" "}
                   <span className="font-semibold text-[9px] text-gray-400 uppercase tracking-wide">
                     Start
                   </span>
-                  <span className="font-semibold text-[12px] text-gray-700">
+                  <span className="font-semibold text-[11px] text-gray-700">
                     {formatToIST(new Date(todo.createdAt), "dd MMM HH:mm:ss")}
                   </span>
                 </span>
                 {todo.endAt && (
                   <span className="flex flex-col items-end gap-1">
-                    {" "}
                     <span className="font-semibold text-[9px] text-gray-400 uppercase tracking-wide">
                       End
                     </span>
-                    <span className="font-semibold text-[12px] text-gray-700">
+                    <span className="font-semibold text-[11px] text-gray-700">
                       {formatToIST(new Date(todo.endAt), "dd MMM HH:mm:ss")}
                     </span>
                   </span>
                 )}
               </div>
+
               {todo.status === "completed" && todo.completedAt && (
                 <div className="flex items-center justify-between rounded-lg bg-green-50 px-3 py-1.5">
-                  {" "}
                   <span className="font-semibold text-[9px] text-green-500 uppercase tracking-wide">
                     ✓ Completed
                   </span>
-                  <span className="font-semibold text-[12px] text-green-600">
+                  <span className="font-semibold text-[11px] text-green-600">
                     {formatToIST(new Date(todo.completedAt), "dd MMM HH:mm:ss")}
                   </span>
                 </div>
               )}
+
               {progress && todo.endAt && (
-                <div className="flex flex-col gap-2">
-                  {" "}
+                <div className="flex flex-col gap-2 px-1">
                   <TimeTicker
                     endAt={todo.endAt}
                     now={now}

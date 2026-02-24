@@ -15,6 +15,7 @@ import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -26,6 +27,7 @@ type RegisterFormInput = z.infer<typeof RegisterSchema>;
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -33,38 +35,24 @@ export default function RegisterPage() {
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormInput>({ resolver: zodResolver(RegisterSchema) });
 
-  const { mutateAsync: registerUser, isPending } = useMutation({
-    mutationFn: async (values: RegisterFormInput) => {
-      const { data, error } = await authClient.signUp.email({
+  const { mutate: registerUser, isPending } = useMutation({
+    mutationFn: (values: RegisterFormInput) =>
+      authClient.signUp.email({
         name: values.name,
         email: values.email,
         password: values.password,
-      });
-      if (error) {
-        switch (error.status) {
-          case 422:
-            throw new Error("User already exists with this email!");
-          case 400:
-            throw new Error("Invalid email or password format!");
-          case 500:
-            throw new Error("Server error! Please try again later.");
-          default:
-            throw new Error(error.message ?? "Sign up failed!");
-        }
-      }
-      return data;
+      }),
+    onSuccess: () => {
+      toast.success("Account created successfully! Please login.");
+      router.push("/login");
+    },
+    onError: (error: Error) => {
+      toast.error(error.message ?? "Registration failed");
     },
   });
 
-  async function onSubmit(data: RegisterFormInput) {
-    try {
-      await registerUser(data);
-      toast.success("Account created successfully! Please login.");
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Registration failed"
-      );
-    }
+  function onSubmit(data: RegisterFormInput) {
+    registerUser(data);
   }
 
   return (
