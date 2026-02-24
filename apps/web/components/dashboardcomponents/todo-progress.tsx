@@ -7,7 +7,7 @@ import {
 } from "@workspace/ui/components/card";
 
 import { Progress } from "@workspace/ui/components/progress";
-import { useTodoQuery } from "../../hooks/queryhook";
+import { useTodoQuery } from "../../hooks/query-hook";
 
 export function TodoProgress() {
   const { data: todos = [] } = useTodoQuery();

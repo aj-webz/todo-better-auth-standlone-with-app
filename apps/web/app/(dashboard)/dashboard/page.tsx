@@ -1,11 +1,11 @@
 "use client";
 
-import { DashboardStats } from "@/components/dashboardcomponents/CardStatus";
+import { DashboardStats } from "@/components/dashboardcomponents/card-status";
 import StatCard from "@/components/dashboardcomponents/stat-card";
-import { TodoProgress } from "@/components/dashboardcomponents/TodoProgress";
 import { TodoStatusChart } from "@/components/dashboardcomponents/todo-charts";
-import Sidebar from "@/components/sidebar/Sidebar";
-import { useTodoQuery } from "@/hooks/queryhook";
+import { TodoProgress } from "@/components/dashboardcomponents/todo-progress";
+import Sidebar from "@/components/sidebar/sidebar";
+import { useTodoQuery } from "@/hooks/query-hook";
 
 export default function DashboardPage() {
   const { data: todos = [] } = useTodoQuery();

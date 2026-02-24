@@ -1,6 +1,5 @@
 //import bcrypt from "bcryptjs";
 
-import { serve } from "@hono/node-server";
 import { getDb, todos } from "@repo/db";
 import {
   CreateTodoSchema,
@@ -23,9 +22,10 @@ import {
   validator,
 } from "hono-openapi";
 import { nanoid } from "nanoid";
-import  z from "zod";
+import z from "zod";
 import { auth } from "./auth";
-//import { serve } from "@hono/node-server"
+
+//import { serve } from "@hono/node-server"zz
 
 type Variables = {
   user: typeof auth.$Infer.Session.user | null;
@@ -453,6 +453,9 @@ app.patch(
     const { id } = c.req.param();
     const { status } = c.req.valid("json");
     const user = c.get("user");
+    if (!user) {
+      throw new Error("Unauthorized");
+    }
 
     const [row] = await db
       .update(todos)

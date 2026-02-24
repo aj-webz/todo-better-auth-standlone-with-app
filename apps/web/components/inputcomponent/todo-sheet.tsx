@@ -23,9 +23,10 @@ import {
 import { Textarea } from "@workspace/ui/components/textarea";
 import { format } from "date-fns";
 import { CalendarIcon, Plus } from "lucide-react";
-import * as React from "react";
+import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { useCreateTodo } from "@/hooks/queryhook";
+import { toast } from "sonner";
+import { useCreateTodo } from "@/hooks/query-hook";
 
 export function CreateTodoSheet(): React.ReactElement {
   const createTodo = useCreateTodo();
@@ -42,8 +43,6 @@ export function CreateTodoSheet(): React.ReactElement {
   });
 
   const onSubmit: SubmitHandler<CreateTodoFormInput> = (values) => {
-    console.log("FORM VALUES (raw):", values);
-
     const timeParts = values.dueTime.split(":").map(Number);
     const h = timeParts[0] ?? 0;
     const m = timeParts[1] ?? 0;
@@ -62,7 +61,7 @@ export function CreateTodoSheet(): React.ReactElement {
       },
       {
         onSuccess: () => {
-          console.log("Todo created!");
+          toast.success("Todo created successfully!");
           form.reset({
             title: "",
             description: "",
@@ -73,10 +72,8 @@ export function CreateTodoSheet(): React.ReactElement {
         },
         onError: (err) => {
           const message =
-            typeof err === "object" && err !== null && "error" in err
-              ? (err as { error: string }).error
-              : "Failed to create todo";
-          window.alert(`${message}`);
+            err instanceof Error ? err.message : "Failed to create todo";
+          toast.error(message);
         },
       }
     );
@@ -136,7 +133,6 @@ export function CreateTodoSheet(): React.ReactElement {
                   variant="outline"
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-
                   {dueDate ? format(dueDate, "dd MMM yyyy") : "Pick a date"}
                 </Button>
               </PopoverTrigger>
@@ -163,14 +159,12 @@ export function CreateTodoSheet(): React.ReactElement {
             )}
           </div>
 
-          {/* Time */}
           <div className="space-y-2">
             <Label htmlFor="time">Due Time</Label>
             <Input
               id="time"
               onChange={(e) => {
                 const value = e.target.value;
-                // ✅ Normalize to HH:mm:ss
                 const normalized = value.length === 5 ? `${value}:00` : value;
                 form.setValue("dueTime", normalized, {
                   shouldValidate: true,

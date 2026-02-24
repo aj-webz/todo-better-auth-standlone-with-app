@@ -11,8 +11,7 @@ import { user } from "./auth-schema";
 //     createdAt:timestamp("created_at").defaultNow().notNull(),
 //   }
 // )
-
-export const todoStatusEnum = pgEnum("todo_status", [
+const todoStatusEnum = pgEnum("todo_status", [
   "todo",
   "in-progress",
   "backlog",
@@ -20,7 +19,7 @@ export const todoStatusEnum = pgEnum("todo_status", [
   "cancelled",
 ]);
 
-export const todos = pgTable("todoworker", {
+const todos = pgTable("todoworker", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
@@ -35,3 +34,5 @@ export const todos = pgTable("todoworker", {
   endAt: timestamp("end_at", { withTimezone: true, mode: "date" }).notNull(),
   completedAt: timestamp("completed_at", { withTimezone: true, mode: "date" }),
 });
+
+export { todoStatusEnum, todos };

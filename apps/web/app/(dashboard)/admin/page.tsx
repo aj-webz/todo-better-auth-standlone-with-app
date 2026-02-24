@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@workspace/ui/components/table";
 import type { ReactElement } from "react";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Sidebar from "@/components/sidebar/sidebar";
 
 interface User {
   createdAt: string;

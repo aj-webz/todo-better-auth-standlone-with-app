@@ -1,6 +1,6 @@
 "use client";
 import { isToday } from "date-fns";
-import { useTodoQuery } from "@/hooks/queryhook";
+import { useTodoQuery } from "@/hooks/query-hook";
 import StatCard from "./stat-card";
 export function DashboardStats() {
   const { data: todos = [] } = useTodoQuery();

@@ -1,4 +1,4 @@
-import NavbarClient from "@/components/navbar/NavbarClient";
+import NavbarClient from "@/components/navbar/navbar-client";
 
 export default function DashboardLayout({
   children,

@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
+
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { account, session, user } from "./auth-schema";
-import * as schema from "./schema";
+import { todoStatusEnum, todos } from "./schema";
 
 dotenv.config({ path: "../../.env" });
 
@@ -30,9 +31,10 @@ export function getDb() {
     connect_timeout: 30,
   });
 
-  db = drizzle(client, { schema });
+  db = drizzle(client, {
+    schema: { todos, todoStatusEnum, user, account, session },
+  });
   return db;
 }
-
+export { user, session, account };
 export { todos } from "./schema";
-export { user, account, session };

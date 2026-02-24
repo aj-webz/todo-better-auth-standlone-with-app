@@ -15,9 +15,9 @@ import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import type { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 
@@ -26,13 +26,14 @@ type RegisterFormInput = z.infer<typeof RegisterSchema>;
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormInput>({ resolver: zodResolver(RegisterSchema) });
 
-  const { mutate: registerUser, isPending } = useMutation({
+  const { mutateAsync: registerUser, isPending } = useMutation({
     mutationFn: async (values: RegisterFormInput) => {
       const { data, error } = await authClient.signUp.email({
         name: values.name,
@@ -53,20 +54,21 @@ export default function RegisterPage() {
       }
       return data;
     },
-    onSuccess: () => {
-      window.alert("Account created successfully! please login.");
-    },
-    onError: (error: Error) => {
-      window.alert(`Registration failed: ${error.message}`);
-    },
   });
 
-  function onSubmit(data: RegisterFormInput) {
-    registerUser(data);
+  async function onSubmit(data: RegisterFormInput) {
+    try {
+      await registerUser(data);
+      toast.success("Account created successfully! Please login.");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Registration failed"
+      );
+    }
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-muted/40 to-muted px-6">
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-background via-muted/40 to-muted px-6">
       <Card className="w-full max-w-xl rounded-3xl border border-border/50 bg-background/90 shadow-2xl backdrop-blur-xl">
         <CardHeader className="space-y-5 px-12 pt-14 pb-6 text-center">
           <CardTitle className="font-extrabold text-4xl tracking-tight">

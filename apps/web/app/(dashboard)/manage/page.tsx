@@ -1,4 +1,4 @@
-import { CreateTodoSheet } from "../../../components/inputcomponent/TodoSheet";
+import { CreateTodoSheet } from "../../../components/inputcomponent/todo-sheet";
 import { KanbanBoard } from "../../../components/kanban";
 
 export default function ManagePage() {

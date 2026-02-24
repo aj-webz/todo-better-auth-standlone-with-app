@@ -16,7 +16,7 @@ import {
   YAxis,
 } from "@workspace/ui/components/chart";
 import { isToday } from "date-fns";
-import { useTodoQuery } from "@/hooks/queryhook";
+import { useTodoQuery } from "@/hooks/query-hook";
 
 function dataVariation(todos: Todo[]) {
   return [
